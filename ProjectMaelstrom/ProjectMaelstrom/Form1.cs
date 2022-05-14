@@ -22,6 +22,16 @@ namespace ProjectMaelstrom
         {
             CheckForIllegalCrossThreadCalls = false;
 
+            string[] reagents = Directory.GetDirectories($"{resolutionSelector.Text}/Bazaar/BazaarReagents/").Select(d => new DirectoryInfo(d).Name).ToArray();
+            reagents.OrderBy(x => x);
+
+            availableReagents.Items.Clear();
+
+            for (int i = 0; i < reagents.Length; i++)
+            {
+                availableReagents.Items.Add(Char.ToUpper(reagents[i][0]) + reagents[i].Substring(1));
+            }
+
             Task.Run(() => UpdateMouse());
         }
 
@@ -49,7 +59,7 @@ namespace ProjectMaelstrom
             {
                 List<string> searchForReagents = purchaseReagents.Items.Cast<string>().ToList();
 
-                for(int i = 0; i < searchForReagents.Count; i++)
+                for (int i = 0; i < searchForReagents.Count; i++)
                 {
                     ReagentLoop(searchForReagents[i]);
                 }
@@ -87,7 +97,7 @@ namespace ProjectMaelstrom
                         {
                             WinAPI.click(reagent);
                             foundReagent = true;
-                            maxPages = true;                        
+                            maxPages = true;
                         }
                     }
                 }
@@ -178,7 +188,7 @@ namespace ProjectMaelstrom
             }
             else
             {
-                WinAPI.click(new Point(0, 0));
+                WinAPI.click(new Point(50, 20));
             }
         }
 
