@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace ProjectMaelstrom
 {
-    public partial class Form1 : Form
+    public partial class BazaarReagentBot : Form
     {
         [DllImport("user32.dll", SetLastError = true)]
         public static extern short GetAsyncKeyState(int vKey);
@@ -13,7 +13,7 @@ namespace ProjectMaelstrom
         private Thread _bazaarBot;
         private bool _botRun = false;
 
-        public Form1()
+        public BazaarReagentBot()
         {
             InitializeComponent();
         }
@@ -57,6 +57,9 @@ namespace ProjectMaelstrom
         {
             while (_botRun)
             {
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+
                 List<string> searchForReagents = purchaseReagents.Items.Cast<string>().ToList();
 
                 for (int i = 0; i < searchForReagents.Count; i++)

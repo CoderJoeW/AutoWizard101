@@ -1,6 +1,6 @@
 ﻿namespace ProjectMaelstrom
 {
-    partial class Form1
+    partial class BazaarReagentBot
     {
         /// <summary>
         ///  Required designer variable.
