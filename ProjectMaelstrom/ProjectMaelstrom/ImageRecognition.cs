@@ -21,6 +21,7 @@ namespace ProjectMaelstrom
             Rectangle rect = SearchBitmap(findBitmap, screenBitmap, 0.05);
 
             screenBitmap.Dispose();
+            findBitmap.Dispose();
 
             File.Delete($"screenshots/{imgKey}.png");
 
@@ -29,7 +30,7 @@ namespace ProjectMaelstrom
 
         private Bitmap TakeScreenshot(string imgKey)
         {
-            var bmpScreenshot = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, PixelFormat.Format32bppArgb);
+            var bmpScreenshot = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, PixelFormat.Format24bppRgb);
 
             var gfxScreenshot = Graphics.FromImage(bmpScreenshot);
 
