@@ -9,6 +9,14 @@ namespace ProjectMaelstrom
         [DllImport("user32.dll", SetLastError = true)]
         public static extern short GetAsyncKeyState(int vKey);
 
+        [DllImport("user32.dll")]
+        internal static extern void keybd_event(
+            byte bVk,
+            byte bScan,
+            uint dwFlags,
+            uint dwExtraInfo
+        );
+
         private ImageRecognition _image_recognition = new ImageRecognition();
         private Thread _bazaarBot;
         private bool _botRun = false;
