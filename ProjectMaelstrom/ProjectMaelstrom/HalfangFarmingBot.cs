@@ -68,7 +68,8 @@ namespace ProjectMaelstrom
                     }
 
                     ResetCursor();
-                }else if(!IsInBattle() && battleStarted)
+                }
+                /*else if(!IsInBattle() && battleStarted)
                 {
                     Teleport();
                     battleStarted = false;
@@ -79,7 +80,7 @@ namespace ProjectMaelstrom
                     SetMarker();
                     JoinFight();
                     justTeleported = false;
-                }
+                }*/
             }
         }
 
