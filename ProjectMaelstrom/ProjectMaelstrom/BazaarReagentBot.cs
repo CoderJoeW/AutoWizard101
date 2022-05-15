@@ -96,7 +96,7 @@ namespace ProjectMaelstrom
             bool foundReagent = false;
             bool maxPages = false;
 
-            while (!maxPages)
+            while (!maxPages && _botRun)
             {
                 for (int i = 0; i < images.Length; i++)
                 {
