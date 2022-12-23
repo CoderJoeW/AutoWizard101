@@ -19,7 +19,7 @@ namespace ProjectMaelstrom.Utilities
             }
         }
 
-        private void Teleport()
+        public void Teleport()
         {
             Point teleport = _imageRecognition.GetImageLocation($"{Constants.RESOLUTION}/Combat/Utils/teleportto.png");
 
