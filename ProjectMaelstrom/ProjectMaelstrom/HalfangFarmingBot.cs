@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ProjectMaelstrom.Utilities;
 
 namespace ProjectMaelstrom
 {
@@ -72,26 +73,6 @@ namespace ProjectMaelstrom
 
                     _combatUtils.ResetCursor();
                 }
-            }
-        }
-
-        private void Teleport()
-        {
-            Point teleport = _image_recognition.GetImageLocation($"{Constants.RESOLUTION}/Combat/Utils/teleportto.png");
-
-            if(teleport.X > 0 && teleport.Y > 0)
-            {
-                WinAPI.click(teleport);
-            }
-        }
-
-        private void SetMarker()
-        {
-            Point marker = _image_recognition.GetImageLocation($"{Constants.RESOLUTION}/Combat/Utils/marklocation.png");
-
-            if (marker.X > 0 && marker.Y > 0)
-            {
-                WinAPI.click(marker);
             }
         }
 
