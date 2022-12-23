@@ -87,5 +87,19 @@ namespace ProjectMaelstrom.Utilities
                 _playerController.Click(new Point(50, 20));
             }
         }
+
+        public bool IsOutsideDungeon()
+        {
+            Point sigil = _imageRecognition.GetImageLocation($"{Constants.RESOLUTION}/Combat/Utils/sigil.png");
+
+            if (sigil.X > 0 && sigil.Y > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

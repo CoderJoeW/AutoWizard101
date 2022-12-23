@@ -27,6 +27,7 @@ namespace ProjectMaelstrom
 
         private PlayerController _playerController = new PlayerController();
         private CombatUtils _combatUtils = new CombatUtils();
+        private GeneralUtils _generalUtils = new GeneralUtils();
 
         public HalfangFarmingBot()
         {
@@ -47,7 +48,7 @@ namespace ProjectMaelstrom
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
 
-                if (IsOutside())
+                if (_combatUtils.IsOutsideDungeon())
                 {
                     botState.Text = "Outside joining";
                     _playerController.Interact();
@@ -73,20 +74,6 @@ namespace ProjectMaelstrom
 
                     _combatUtils.ResetCursor();
                 }
-            }
-        }
-
-        private bool IsOutside()
-        {
-            Point sigil = _image_recognition.GetImageLocation($"{Constants.RESOLUTION}/Combat/Utils/sigil.png");
-
-            if(sigil.X > 0 && sigil.Y > 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
             }
         }
 
