@@ -29,6 +29,8 @@ namespace ProjectMaelstrom
         private CombatUtils _combatUtils = new CombatUtils();
         private GeneralUtils _generalUtils = new GeneralUtils();
 
+        private bool battleStarted = false;
+
         public HalfangFarmingBot()
         {
             InitializeComponent();
@@ -38,11 +40,8 @@ namespace ProjectMaelstrom
 
         private void HalfangFarmingBot_Load(object sender, EventArgs e){}
 
-        private void RunBot()
+        private void DungeonLoop()
         {
-            bool battleStarted = false;
-            bool justTeleported = false;
-
             while (_botRun)
             {
                 GC.Collect();
@@ -50,29 +49,44 @@ namespace ProjectMaelstrom
 
                 if (_combatUtils.IsOutsideDungeon())
                 {
-                    botState.Text = "Outside joining";
+                    botState.Text = "Outside dungeon joining";
                     _playerController.Interact();
                 }
-                
-                if (!IsBattleStarted())
+
+                if(!IsBattleStarted())
                 {
-                    botState.Text = "Joining Battle";
+                    botState.Text = "Battle not started joining";
                     _playerController.MoveForward();
                 }
 
-                if (_combatUtils.IsInBattle() && _combatUtils.IsMyTurn())
+                if (_combatUtils.IsInBattle())
                 {
-                    botState.Text = "In battle my turn";
-                    battleStarted = true;
-                    bool result = _combatUtils.UseCard("meteor");
+                    battleStarted= true;
 
-                    if (!result)
+                    if (_combatUtils.IsMyTurn())
                     {
-                        //If we couldnt find the meteor card we pass
-                        _combatUtils.Pass();
-                    }
+                        botState.Text = "My turn";
+                        bool result = _combatUtils.UseCard("meteor");
 
-                    _combatUtils.ResetCursor();
+                        if (!result)
+                        {
+                            _combatUtils.Pass();
+                        }
+
+                        _combatUtils.ResetCursor();
+                    }
+                    else
+                    {
+                        botState.Text = "Waiting for turn";
+                    }
+                }
+                else
+                {
+                    if (battleStarted)
+                    {
+                        botState.Text = "Battle won";
+                        battleStarted = false;
+                    }
                 }
             }
         }
@@ -93,7 +107,7 @@ namespace ProjectMaelstrom
 
         private void button1_Click(object sender, EventArgs e)
         {
-            _halfangBot = new Thread(RunBot);
+            _halfangBot = new Thread(DungeonLoop);
             _halfangBot.Name = "Halfang Bot";
             _botRun = true;
             _halfangBot.Start();
