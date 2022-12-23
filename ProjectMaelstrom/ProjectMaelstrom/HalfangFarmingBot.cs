@@ -29,6 +29,8 @@ namespace ProjectMaelstrom
         private Thread _halfangBot;
         private bool _botRun = false;
 
+        private string _resolution = "1024x768";
+
         public HalfangFarmingBot()
         {
             InitializeComponent();
@@ -86,7 +88,7 @@ namespace ProjectMaelstrom
 
         private void Teleport()
         {
-            Point teleport = _image_recognition.GetImageLocation($"800x600/Halfang/Utils/teleportto.png");
+            Point teleport = _image_recognition.GetImageLocation($"{_resolution}/Halfang/Utils/teleportto.png");
 
             if(teleport.X > 0 && teleport.Y > 0)
             {
@@ -96,7 +98,7 @@ namespace ProjectMaelstrom
 
         private void SetMarker()
         {
-            Point marker = _image_recognition.GetImageLocation($"800x600/Halfang/Utils/marklocation.png");
+            Point marker = _image_recognition.GetImageLocation($"{_resolution}/Halfang/Utils/marklocation.png");
 
             if (marker.X > 0 && marker.Y > 0)
             {
@@ -129,7 +131,7 @@ namespace ProjectMaelstrom
 
         private bool IsBattleStarted()
         {
-            Point bristlecrown = _image_recognition.GetImageLocation("800x600/Halfang/Utils/bristlecrown.png");
+            Point bristlecrown = _image_recognition.GetImageLocation($"{_resolution}/Halfang/Utils/bristlecrown.png");
 
             if(bristlecrown.X > 0 && bristlecrown.Y > 0)
             {
@@ -166,7 +168,7 @@ namespace ProjectMaelstrom
 
         private bool IsInBattle()
         {
-            Point spellbook = _image_recognition.GetImageLocation($"800x600/Halfang/Utils/spellbook.png");
+            Point spellbook = _image_recognition.GetImageLocation($"{_resolution}/Halfang/Utils/spellbook.png");
 
             if(spellbook.X > 0 && spellbook.Y > 0)
             {
@@ -182,7 +184,7 @@ namespace ProjectMaelstrom
         {
             bool matchFound = false;
 
-            string[] images = Directory.GetFiles($"800x600/Halfang/Cards/meteor/");
+            string[] images = Directory.GetFiles($"{_resolution}/Halfang/Cards/meteor/");
 
             for (int i = 0; i < images.Length; i++)
             {
@@ -207,7 +209,7 @@ namespace ProjectMaelstrom
 
         private bool IsMyTurn()
         {
-            Point passBtn = _image_recognition.GetImageLocation($"800x600/Halfang/Utils/passbutton.png");
+            Point passBtn = _image_recognition.GetImageLocation($"{_resolution}/Halfang/Utils/passbutton.png");
 
             if (passBtn.X > 0 && passBtn.Y > 0)
             {
@@ -221,7 +223,7 @@ namespace ProjectMaelstrom
 
         private void Pass()
         {
-            Point passBtn = _image_recognition.GetImageLocation($"800x600/Halfang/Utils/passbutton.png");
+            Point passBtn = _image_recognition.GetImageLocation($"{_resolution}/Halfang/Utils/passbutton.png");
 
             if(passBtn.X > 0 && passBtn.Y > 0)
             {
@@ -231,7 +233,7 @@ namespace ProjectMaelstrom
 
         private void ResetCursor()
         {
-            Point blankSpot = _image_recognition.GetImageLocation($"800x600/Halfang/Utils/blank.png");
+            Point blankSpot = _image_recognition.GetImageLocation($"{_resolution}/Halfang/Utils/blank.png");
 
             if (blankSpot.X > 0 && blankSpot.Y > 0)
             {
