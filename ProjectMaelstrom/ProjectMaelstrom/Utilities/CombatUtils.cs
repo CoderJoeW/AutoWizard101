@@ -5,16 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectMaelstrom
+namespace ProjectMaelstrom.Utilities
 {
-    internal class CombatUtils
+    internal class CombatUtils : Util
     {
-        private ImageRecognition _image_recognition = new ImageRecognition();
-        private PlayerController _playerController = new PlayerController();
-
         public bool IsInBattle()
         {
-            Point spellbook = _image_recognition.GetImageLocation($"{Constants.RESOLUTION}/Combat/Utils/spellbook.png");
+            Point spellbook = _imageRecognition.GetImageLocation($"{Constants.RESOLUTION}/Combat/Utils/spellbook.png");
 
             if (spellbook.X > 0 && spellbook.Y > 0)
             {
@@ -36,7 +33,7 @@ namespace ProjectMaelstrom
             {
                 if (!matchFound)
                 {
-                    Point card = _image_recognition.GetImageLocation(images[i]);
+                    Point card = _imageRecognition.GetImageLocation(images[i]);
 
                     if (card.X > 0 && card.Y > 0)
                     {
@@ -55,7 +52,7 @@ namespace ProjectMaelstrom
 
         public bool IsMyTurn()
         {
-            Point passBtn = _image_recognition.GetImageLocation($"{Constants.RESOLUTION}/Combat/Utils/passbutton.png");
+            Point passBtn = _imageRecognition.GetImageLocation($"{Constants.RESOLUTION}/Combat/Utils/passbutton.png");
 
             if (passBtn.X > 0 && passBtn.Y > 0)
             {
@@ -69,7 +66,7 @@ namespace ProjectMaelstrom
 
         public void Pass()
         {
-            Point passBtn = _image_recognition.GetImageLocation($"{Constants.RESOLUTION}/Combat/Utils/passbutton.png");
+            Point passBtn = _imageRecognition.GetImageLocation($"{Constants.RESOLUTION}/Combat/Utils/passbutton.png");
 
             if (passBtn.X > 0 && passBtn.Y > 0)
             {
@@ -79,7 +76,7 @@ namespace ProjectMaelstrom
 
         public void ResetCursor()
         {
-            Point blankSpot = _image_recognition.GetImageLocation($"{Constants.RESOLUTION}/Combat/Utils/blank.png");
+            Point blankSpot = _imageRecognition.GetImageLocation($"{Constants.RESOLUTION}/Combat/Utils/blank.png");
 
             if (blankSpot.X > 0 && blankSpot.Y > 0)
             {
