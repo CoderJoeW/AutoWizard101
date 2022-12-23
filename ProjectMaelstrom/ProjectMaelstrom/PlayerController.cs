@@ -12,7 +12,7 @@ namespace ProjectMaelstrom
 {
     internal class PlayerController
     {
-        private InputSimulator _inputSimulator;
+        private InputSimulator _inputSimulator = new InputSimulator();
 
         public void MoveForward()
         {
