@@ -9,8 +9,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using ProjectMaelstrom.Structs;
-
 namespace ProjectMaelstrom
 {
     public partial class HalfangFarmingBot : Form
@@ -19,9 +17,6 @@ namespace ProjectMaelstrom
         [DllImport("user32.dll", SetLastError = true)]
         public static extern short GetAsyncKeyState(int vKey);
 
-        [DllImport("user32.dll", SetLastError = true)]
-        private static extern uint SendInput(uint nInputs, Input[] pInputs, int cbSize);
-
         [DllImport("user32.dll")]
         private static extern IntPtr GetMessageExtraInfo();
 
@@ -29,19 +24,17 @@ namespace ProjectMaelstrom
         private Thread _halfangBot;
         private bool _botRun = false;
 
-        private string _resolution = "1024x768";
+        private PlayerController _playerController = new PlayerController();
+        private CombatUtils _combatUtils = new CombatUtils();
 
         public HalfangFarmingBot()
         {
             InitializeComponent();
-
+            CheckForIllegalCrossThreadCalls = false;
             
         }
 
-        private void HalfangFarmingBot_Load(object sender, EventArgs e)
-        {
-            Task.Run(() => UpdateMouse());
-        }
+        private void HalfangFarmingBot_Load(object sender, EventArgs e){}
 
         private void RunBot()
         {
@@ -52,43 +45,39 @@ namespace ProjectMaelstrom
             {
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
+
+                if (IsOutside())
+                {
+                    botState.Text = "Outside joining";
+                    _playerController.Interact();
+                }
                 
                 if (!IsBattleStarted())
                 {
-                    MoveForward();
+                    botState.Text = "Joining Battle";
+                    _playerController.MoveForward();
                 }
 
-                if (IsInBattle() && IsMyTurn())
+                if (_combatUtils.IsInBattle() && _combatUtils.IsMyTurn())
                 {
+                    botState.Text = "In battle my turn";
                     battleStarted = true;
-                    bool result = UseMeteorCard();
+                    bool result = _combatUtils.UseCard("meteor");
 
                     if (!result)
                     {
                         //If we couldnt find the meteor card we pass
-                        Pass();
+                        _combatUtils.Pass();
                     }
 
-                    ResetCursor();
+                    _combatUtils.ResetCursor();
                 }
-                /*else if(!IsInBattle() && battleStarted)
-                {
-                    Teleport();
-                    battleStarted = false;
-                    justTeleported = true;
-                }else if(!IsInBattle() && justTeleported)
-                {
-                    Thread.Sleep(5000);
-                    SetMarker();
-                    JoinFight();
-                    justTeleported = false;
-                }*/
             }
         }
 
         private void Teleport()
         {
-            Point teleport = _image_recognition.GetImageLocation($"{_resolution}/Halfang/Utils/teleportto.png");
+            Point teleport = _image_recognition.GetImageLocation($"{Constants.RESOLUTION}/Combat/Utils/teleportto.png");
 
             if(teleport.X > 0 && teleport.Y > 0)
             {
@@ -98,7 +87,7 @@ namespace ProjectMaelstrom
 
         private void SetMarker()
         {
-            Point marker = _image_recognition.GetImageLocation($"{_resolution}/Halfang/Utils/marklocation.png");
+            Point marker = _image_recognition.GetImageLocation($"{Constants.RESOLUTION}/Combat/Utils/marklocation.png");
 
             if (marker.X > 0 && marker.Y > 0)
             {
@@ -106,32 +95,23 @@ namespace ProjectMaelstrom
             }
         }
 
-        private void JoinFight()
+        private bool IsOutside()
         {
-            Input[] inputs = new Input[]
-            {
-                new Input
-                {
-                    type = (int)InputType.Keyboard,
-                    u = new InputUnion
-                    {
-                        ki = new KeyboardInput
-                        {
-                            wVk = 0x58,
-                            wScan = 0, // W
-                            dwFlags = (uint)(KeyEventF.KeyDown | KeyEventF.Scancode),
-                            dwExtraInfo = GetMessageExtraInfo()
-                        }
-                    }
-                }
-            };
+            Point sigil = _image_recognition.GetImageLocation($"{Constants.RESOLUTION}/Combat/Utils/sigil.png");
 
-            SendInput((uint)inputs.Length, inputs, Marshal.SizeOf(typeof(Input)));
+            if(sigil.X > 0 && sigil.Y > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private bool IsBattleStarted()
         {
-            Point bristlecrown = _image_recognition.GetImageLocation($"{_resolution}/Halfang/Utils/bristlecrown.png");
+            Point bristlecrown = _image_recognition.GetImageLocation($"{Constants.RESOLUTION}/Halfang/bristlecrown.png");
 
             if(bristlecrown.X > 0 && bristlecrown.Y > 0)
             {
@@ -140,126 +120,6 @@ namespace ProjectMaelstrom
             else
             {
                 return true;
-            }
-        }
-
-        private void MoveForward()
-        {
-            Input[] inputs = new Input[]
-            {
-                new Input
-                {
-                    type = (int)InputType.Keyboard,
-                    u = new InputUnion
-                    {
-                        ki = new KeyboardInput
-                        {
-                            wVk = 0,
-                            wScan = 0x11, // W
-                            dwFlags = (uint)(KeyEventF.KeyDown | KeyEventF.Scancode),
-                            dwExtraInfo = GetMessageExtraInfo()
-                        }
-                    }
-                }
-            };
-
-            SendInput((uint)inputs.Length, inputs, Marshal.SizeOf(typeof(Input)));
-        }
-
-        private bool IsInBattle()
-        {
-            Point spellbook = _image_recognition.GetImageLocation($"{_resolution}/Halfang/Utils/spellbook.png");
-
-            if(spellbook.X > 0 && spellbook.Y > 0)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-
-        private bool UseMeteorCard()
-        {
-            bool matchFound = false;
-
-            string[] images = Directory.GetFiles($"{_resolution}/Halfang/Cards/meteor/");
-
-            for (int i = 0; i < images.Length; i++)
-            {
-                if (!matchFound)
-                {
-                    Point meteor = _image_recognition.GetImageLocation(images[i]);
-
-                    if (meteor.X > 0 && meteor.Y > 0)
-                    {
-                        WinAPI.click(meteor);
-                        matchFound = true;
-                    }
-                    else
-                    {
-                        matchFound = false;
-                    }
-                }
-            }
-
-            return matchFound;
-        }
-
-        private bool IsMyTurn()
-        {
-            Point passBtn = _image_recognition.GetImageLocation($"{_resolution}/Halfang/Utils/passbutton.png");
-
-            if (passBtn.X > 0 && passBtn.Y > 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        private void Pass()
-        {
-            Point passBtn = _image_recognition.GetImageLocation($"{_resolution}/Halfang/Utils/passbutton.png");
-
-            if(passBtn.X > 0 && passBtn.Y > 0)
-            {
-                WinAPI.click(passBtn);
-            }
-        }
-
-        private void ResetCursor()
-        {
-            Point blankSpot = _image_recognition.GetImageLocation($"{_resolution}/Halfang/Utils/blank.png");
-
-            if (blankSpot.X > 0 && blankSpot.Y > 0)
-            {
-                WinAPI.click(blankSpot);
-            }
-            else
-            {
-                WinAPI.click(new Point(50, 20));
-            }
-        }
-
-        private void UpdateMouse()
-        {
-            while (true)
-            {
-                if (this.WindowState == FormWindowState.Normal)
-                {
-                    //xLabel.Text = "X: " + Cursor.Position.X;
-                    //yLabel.Text = "Y: " + Cursor.Position.Y;
-                    Thread.Sleep(10);
-                }
-
-                if (GetAsyncKeyState(0x70) != 0)
-                {
-                    _botRun = false;
-                }
             }
         }
 
