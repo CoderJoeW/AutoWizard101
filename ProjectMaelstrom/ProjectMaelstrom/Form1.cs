@@ -1,4 +1,3 @@
-using static ProjectMaelstrom.Structs.InputStructs;
 using System.Runtime.InteropServices;
 using ProjectMaelstrom.Modules.ImageRecognition;
 
@@ -8,9 +7,6 @@ namespace ProjectMaelstrom
     {
         [DllImport("user32.dll", SetLastError = true)]
         public static extern short GetAsyncKeyState(int vKey);
-
-        [DllImport("user32.dll", SetLastError = true)]
-        private static extern uint SendInput(uint nInputs, Input[] pInputs, int cbSize);
 
         [DllImport("user32.dll")]
         private static extern IntPtr GetMessageExtraInfo();
