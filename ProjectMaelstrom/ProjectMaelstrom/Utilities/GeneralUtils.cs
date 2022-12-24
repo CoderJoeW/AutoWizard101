@@ -21,8 +21,6 @@ namespace ProjectMaelstrom.Utilities
 
         public bool Teleport()
         {
-            bool matchFound = false;
-
             Point teleport = _imageRecognition.GetImageLocation($"Resources/{Constants.RESOLUTION}/Combat/Utils/teleportto.png");
 
             if (teleport.X > 0 && teleport.Y > 0)
