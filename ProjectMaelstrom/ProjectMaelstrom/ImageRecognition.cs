@@ -18,7 +18,7 @@ namespace ProjectMaelstrom
             var screenBitmap = TakeScreenshot(imgKey);
             var findBitmap = new Bitmap(lookfor);
 
-            Rectangle rect = SearchBitmap(findBitmap, screenBitmap, 0.05);
+            Rectangle rect = SearchBitmap(findBitmap, screenBitmap, 0.1);
 
             screenBitmap.Dispose();
             findBitmap.Dispose();
