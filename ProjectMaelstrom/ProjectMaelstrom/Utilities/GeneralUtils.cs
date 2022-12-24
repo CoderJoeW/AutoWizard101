@@ -11,7 +11,7 @@ namespace ProjectMaelstrom.Utilities
     {
         public void SetMarker()
         {
-            Point marker = _imageRecognition.GetImageLocation($"{Constants.RESOLUTION}/Combat/Utils/marklocation.png");
+            Point marker = _imageRecognition.GetImageLocation($"Resources/{Constants.RESOLUTION}/Combat/Utils/marklocation.png");
 
             if (marker.X > 0 && marker.Y > 0)
             {
@@ -21,7 +21,7 @@ namespace ProjectMaelstrom.Utilities
 
         public void Teleport()
         {
-            Point teleport = _imageRecognition.GetImageLocation($"{Constants.RESOLUTION}/Combat/Utils/teleportto.png");
+            Point teleport = _imageRecognition.GetImageLocation($"Resources/{Constants.RESOLUTION}/Combat/Utils/teleportto.png");
 
             if (teleport.X > 0 && teleport.Y > 0)
             {
