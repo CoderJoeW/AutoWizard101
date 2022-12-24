@@ -81,7 +81,6 @@ namespace ProjectMaelstrom
                 if (_battleWon)
                 {
                     HandleBattleWon();
-                    continue;
                 }
             }
         }
@@ -142,9 +141,14 @@ namespace ProjectMaelstrom
         private void HandleBattleWon()
         {
             botState.Text = "Battle won teleporting to start";
-            _generalUtils.Teleport();
-            _combatUtils.ResetCursor();
-            _battleWon = false;
+
+            bool teleported = _generalUtils.Teleport();
+            
+            if (teleported)
+            {
+                _combatUtils.ResetCursor();
+                _battleWon = false;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
