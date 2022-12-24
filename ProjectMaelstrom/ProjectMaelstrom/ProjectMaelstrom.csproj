@@ -13,4 +13,34 @@
     <PackageReference Include="InputSimulator" Version="1.0.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Resources\2256x1504\Combat\Cards\meteor\m1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\2256x1504\Combat\Cards\meteor\m2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\2256x1504\Combat\Utils\blank.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\2256x1504\Combat\Utils\marklocation.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\2256x1504\Combat\Utils\passbutton.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\2256x1504\Combat\Utils\sigil.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\2256x1504\Combat\Utils\spellbook.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\2256x1504\Combat\Utils\teleportto.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\2256x1504\Halfang\bristlecrown.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
