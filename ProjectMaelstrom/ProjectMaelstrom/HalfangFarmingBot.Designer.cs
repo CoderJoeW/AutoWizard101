@@ -31,13 +31,18 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.botState = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.inBattleText = new System.Windows.Forms.Label();
+            this.battleWonText = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 12);
+            this.button1.Location = new System.Drawing.Point(13, 84);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(107, 38);
             this.button1.TabIndex = 0;
             this.button1.Text = "Start Bot";
             this.button1.UseVisualStyleBackColor = true;
@@ -46,29 +51,72 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 47);
+            this.label1.Location = new System.Drawing.Point(13, 166);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(33, 15);
+            this.label1.Size = new System.Drawing.Size(51, 25);
             this.label1.TabIndex = 1;
             this.label1.Text = "State";
             // 
             // botState
             // 
             this.botState.AutoSize = true;
-            this.botState.Location = new System.Drawing.Point(65, 47);
+            this.botState.Location = new System.Drawing.Point(72, 166);
+            this.botState.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.botState.Name = "botState";
-            this.botState.Size = new System.Drawing.Size(38, 15);
+            this.botState.Size = new System.Drawing.Size(59, 25);
             this.botState.TabIndex = 2;
             this.botState.Text = "label2";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(13, 9);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(76, 25);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "In Battle";
+            // 
+            // inBattleText
+            // 
+            this.inBattleText.AutoSize = true;
+            this.inBattleText.Location = new System.Drawing.Point(95, 9);
+            this.inBattleText.Name = "inBattleText";
+            this.inBattleText.Size = new System.Drawing.Size(59, 25);
+            this.inBattleText.TabIndex = 4;
+            this.inBattleText.Text = "label3";
+            // 
+            // battleWonText
+            // 
+            this.battleWonText.AutoSize = true;
+            this.battleWonText.Location = new System.Drawing.Point(116, 44);
+            this.battleWonText.Name = "battleWonText";
+            this.battleWonText.Size = new System.Drawing.Size(59, 25);
+            this.battleWonText.TabIndex = 6;
+            this.battleWonText.Text = "label3";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 44);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(98, 25);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Battle Won";
+            // 
             // HalfangFarmingBot
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(241, 138);
+            this.ClientSize = new System.Drawing.Size(344, 230);
+            this.Controls.Add(this.battleWonText);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.inBattleText);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.botState);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "HalfangFarmingBot";
             this.Text = "HalfangFarmingBot";
             this.Load += new System.EventHandler(this.HalfangFarmingBot_Load);
@@ -82,5 +130,9 @@
         private Button button1;
         private Label label1;
         private Label botState;
+        private Label label2;
+        private Label inBattleText;
+        private Label battleWonText;
+        private Label label4;
     }
 }

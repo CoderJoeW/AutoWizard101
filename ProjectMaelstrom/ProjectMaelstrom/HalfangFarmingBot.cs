@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ProjectMaelstrom.Utilities;
+using static System.Windows.Forms.AxHost;
 
 namespace ProjectMaelstrom
 {
@@ -115,7 +116,7 @@ namespace ProjectMaelstrom
 
         private void HandleMyTurn()
         {
-            _battleStarted = true;
+            ChangeBattleState(true);
 
             botState.Text = "My turn";
             bool result = _combatUtils.UseCard("meteor");
@@ -133,8 +134,8 @@ namespace ProjectMaelstrom
             if (_battleStarted)
             {
                 botState.Text = "Battle won";
-                _battleStarted = false;
-                _battleWon = true;
+                ChangeBattleState(false);
+                ChangeBattleWonState(true);
             }
         }
 
@@ -147,7 +148,7 @@ namespace ProjectMaelstrom
             if (teleported)
             {
                 _combatUtils.ResetCursor();
-                _battleWon = false;
+                ChangeBattleWonState(false);
             }
         }
 
@@ -157,6 +158,38 @@ namespace ProjectMaelstrom
             _halfangBot.Name = "Halfang Bot";
             _botRun = true;
             _halfangBot.Start();
+        }
+
+        private void ChangeBattleState(bool state)
+        {
+            _battleStarted = state;
+
+            if (state)
+            {
+                inBattleText.Text = "True";
+                inBattleText.ForeColor = Color.DarkGreen;
+            }
+            else
+            {
+                inBattleText.Text = "False";
+                inBattleText.ForeColor = Color.Red;
+            }
+        }
+
+        private void ChangeBattleWonState(bool state)
+        {
+            _battleWon = state;
+
+            if (state)
+            {
+                battleWonText.Text = "True";
+                battleWonText.ForeColor = Color.DarkGreen;
+            }
+            else
+            {
+                battleWonText.Text = "False";
+                battleWonText.ForeColor = Color.Red;
+            }
         }
     }
 }
