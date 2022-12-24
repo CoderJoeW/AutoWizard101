@@ -51,13 +51,13 @@ namespace ProjectMaelstrom
                 if (_combatUtils.IsOutsideDungeon())
                 {
                     HandleJoinDungeon();
-                    return;
+                    continue;
                 }
 
                 if(!IsBattleStarted())
                 {
                     HandleInDungeonBattleNotStarted();
-                    return;
+                    continue;
                 }
 
                 if (_combatUtils.IsInBattle())
@@ -66,7 +66,7 @@ namespace ProjectMaelstrom
                     if (_combatUtils.IsMyTurn())
                     {
                         HandleMyTurn();
-                        return;
+                        continue;
                     }
                     else
                     {
@@ -76,13 +76,12 @@ namespace ProjectMaelstrom
                 else
                 {
                     HandleBattleOver();
-                    return;
                 }
 
                 if (_battleWon)
                 {
                     HandleBattleWon();
-                    return;
+                    continue;
                 }
             }
         }
