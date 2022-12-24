@@ -80,20 +80,22 @@
             // inBattleText
             // 
             this.inBattleText.AutoSize = true;
+            this.inBattleText.ForeColor = System.Drawing.Color.Red;
             this.inBattleText.Location = new System.Drawing.Point(95, 9);
             this.inBattleText.Name = "inBattleText";
-            this.inBattleText.Size = new System.Drawing.Size(59, 25);
+            this.inBattleText.Size = new System.Drawing.Size(48, 25);
             this.inBattleText.TabIndex = 4;
-            this.inBattleText.Text = "label3";
+            this.inBattleText.Text = "false";
             // 
             // battleWonText
             // 
             this.battleWonText.AutoSize = true;
+            this.battleWonText.ForeColor = System.Drawing.Color.Red;
             this.battleWonText.Location = new System.Drawing.Point(116, 44);
             this.battleWonText.Name = "battleWonText";
-            this.battleWonText.Size = new System.Drawing.Size(59, 25);
+            this.battleWonText.Size = new System.Drawing.Size(48, 25);
             this.battleWonText.TabIndex = 6;
-            this.battleWonText.Text = "label3";
+            this.battleWonText.Text = "false";
             // 
             // label4
             // 
@@ -108,7 +110,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(344, 230);
+            this.ClientSize = new System.Drawing.Size(410, 312);
             this.Controls.Add(this.battleWonText);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.inBattleText);
