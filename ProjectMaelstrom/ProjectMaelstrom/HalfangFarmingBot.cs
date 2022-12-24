@@ -29,7 +29,8 @@ namespace ProjectMaelstrom
         private CombatUtils _combatUtils = new CombatUtils();
         private GeneralUtils _generalUtils = new GeneralUtils();
 
-        private bool battleStarted = false;
+        private bool _battleStarted = false;
+        private bool _battleWon = false;
 
         public HalfangFarmingBot()
         {
@@ -49,31 +50,23 @@ namespace ProjectMaelstrom
 
                 if (_combatUtils.IsOutsideDungeon())
                 {
-                    botState.Text = "Outside dungeon joining";
-                    _playerController.Interact();
+                    HandleJoinDungeon();
+                    return;
                 }
 
                 if(!IsBattleStarted())
                 {
-                    botState.Text = "Battle not started joining";
-                    _playerController.MoveForward();
+                    HandleInDungeonBattleNotStarted();
+                    return;
                 }
 
                 if (_combatUtils.IsInBattle())
                 {
-                    battleStarted= true;
 
                     if (_combatUtils.IsMyTurn())
                     {
-                        botState.Text = "My turn";
-                        bool result = _combatUtils.UseCard("meteor");
-
-                        if (!result)
-                        {
-                            _combatUtils.Pass();
-                        }
-
-                        _combatUtils.ResetCursor();
+                        HandleMyTurn();
+                        return;
                     }
                     else
                     {
@@ -82,11 +75,14 @@ namespace ProjectMaelstrom
                 }
                 else
                 {
-                    if (battleStarted)
-                    {
-                        botState.Text = "Battle won";
-                        battleStarted = false;
-                    }
+                    HandleBattleOver();
+                    return;
+                }
+
+                if (_battleWon)
+                {
+                    HandleBattleWon();
+                    return;
                 }
             }
         }
@@ -103,6 +99,53 @@ namespace ProjectMaelstrom
             {
                 return true;
             }
+        }
+
+        private void HandleJoinDungeon()
+        {
+            botState.Text = "Outside dungeon joining";
+            _generalUtils.SetMarker();
+            _combatUtils.ResetCursor();
+            _playerController.Interact();
+        }
+
+        private void HandleInDungeonBattleNotStarted()
+        {
+            botState.Text = "Battle not started joining";
+            _playerController.MoveForward();
+        }
+
+        private void HandleMyTurn()
+        {
+            _battleStarted = true;
+
+            botState.Text = "My turn";
+            bool result = _combatUtils.UseCard("meteor");
+
+            if (!result)
+            {
+                _combatUtils.Pass();
+            }
+
+            _combatUtils.ResetCursor();
+        }
+
+        private void HandleBattleOver()
+        {
+            if (_battleStarted)
+            {
+                botState.Text = "Battle won";
+                _battleStarted = false;
+                _battleWon = true;
+            }
+        }
+
+        private void HandleBattleWon()
+        {
+            botState.Text = "Battle won teleporting to start";
+            _generalUtils.Teleport();
+            _combatUtils.ResetCursor();
+            _battleWon = false;
         }
 
         private void button1_Click(object sender, EventArgs e)
