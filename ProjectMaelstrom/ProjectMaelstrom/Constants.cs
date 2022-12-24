@@ -8,6 +8,6 @@ namespace ProjectMaelstrom
 {
     internal class Constants
     {
-        public const string RESOLUTION = "2256x1504";
+        public const string RESOLUTION = "1280x720";
     }
 }
