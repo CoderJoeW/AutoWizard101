@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectMaelstrom.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Drawing.Imaging;
 using System.Linq;
@@ -10,11 +11,11 @@ namespace ProjectMaelstrom
 {
     internal class ImageRecognition
     {
-        private Random _random = new Random();
+        private GeneralUtils _generalUtils = new GeneralUtils();
 
         public Point GetImageLocation(string lookfor)
         {
-            string imgKey = RandomString(20);
+            string imgKey = _generalUtils.RandomString(20);
             var screenBitmap = TakeScreenshot(imgKey);
             var findBitmap = new Bitmap(lookfor);
 
@@ -143,13 +144,6 @@ namespace ProjectMaelstrom
             smallBmp.UnlockBits(smallData);
 
             return location;
-        }
-
-        public string RandomString(int length)
-        {
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            return new string(Enumerable.Repeat(chars, length)
-                .Select(s => s[_random.Next(s.Length)]).ToArray());
         }
     }
 }

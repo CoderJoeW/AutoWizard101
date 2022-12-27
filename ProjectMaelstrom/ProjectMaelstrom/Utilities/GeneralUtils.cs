@@ -9,6 +9,8 @@ namespace ProjectMaelstrom.Utilities
 {
     internal class GeneralUtils: Util
     {
+        private Random _random = new Random();
+
         public void SetMarker()
         {
             Point marker = _imageRecognition.GetImageLocation($"Resources/{Constants.RESOLUTION}/Combat/Utils/marklocation.png");
@@ -32,6 +34,13 @@ namespace ProjectMaelstrom.Utilities
             {
                 return false;
             }
+        }
+
+        public string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+                .Select(s => s[_random.Next(s.Length)]).ToArray());
         }
     }
 }
