@@ -10,8 +10,6 @@ namespace ProjectMaelstrom
     internal class ImageToText
     {
         private static string endpoint = "https://api.lazarusforms.com/api";
-        private static string orgId = "xxxx";
-        private static string authKey = "xxxx";
 
         public static async Task<string> Test(string path)
         {
@@ -21,8 +19,8 @@ namespace ProjectMaelstrom
                 var request = new RestRequest("/forms/generic", Method.Post);
                 request.Timeout = -1;
                 request.AddHeader("Content-Type", "multipart/form-data");
-                request.AddHeader("orgId", orgId);
-                request.AddHeader("authKey", authKey);
+                request.AddHeader("orgId", Constants.LAZARUS_ORGANIZATION_ID);
+                request.AddHeader("authKey", Constants.LAZARUS_AUTH_KEY);
                 request.AddFile("file", path);
                 RestResponse response = await client.ExecutePostAsync(request);
                 
