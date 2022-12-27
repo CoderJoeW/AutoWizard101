@@ -30,6 +30,7 @@ namespace ProjectMaelstrom
         private CombatUtils _combatUtils = new CombatUtils();
         private GeneralUtils _generalUtils = new GeneralUtils();
 
+        private bool _joiningDungeon = false;
         private bool _battleStarted = false;
         private bool _battleWon = false;
 
@@ -102,10 +103,18 @@ namespace ProjectMaelstrom
 
         private void HandleJoinDungeon()
         {
+            _joiningDungeon = true;
+            joiningDungeonText.Text = "True";
+            joiningDungeonText.ForeColor = Color.DarkGreen;
+
             botState.Text = "Outside dungeon joining";
             _generalUtils.SetMarker();
             _combatUtils.ResetCursor();
             _playerController.Interact();
+
+            _joiningDungeon = false;
+            joiningDungeonText.Text = "False";
+            joiningDungeonText.ForeColor = Color.Red;
         }
 
         private void HandleInDungeonBattleNotStarted()

@@ -35,11 +35,13 @@
             this.inBattleText = new System.Windows.Forms.Label();
             this.battleWonText = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.joiningDungeonText = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(13, 84);
+            this.button1.Location = new System.Drawing.Point(290, 2);
             this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(107, 38);
@@ -71,7 +73,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 9);
+            this.label2.Location = new System.Drawing.Point(13, 70);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(76, 25);
             this.label2.TabIndex = 3;
@@ -81,7 +83,7 @@
             // 
             this.inBattleText.AutoSize = true;
             this.inBattleText.ForeColor = System.Drawing.Color.Red;
-            this.inBattleText.Location = new System.Drawing.Point(95, 9);
+            this.inBattleText.Location = new System.Drawing.Point(95, 70);
             this.inBattleText.Name = "inBattleText";
             this.inBattleText.Size = new System.Drawing.Size(48, 25);
             this.inBattleText.TabIndex = 4;
@@ -91,7 +93,7 @@
             // 
             this.battleWonText.AutoSize = true;
             this.battleWonText.ForeColor = System.Drawing.Color.Red;
-            this.battleWonText.Location = new System.Drawing.Point(116, 44);
+            this.battleWonText.Location = new System.Drawing.Point(116, 105);
             this.battleWonText.Name = "battleWonText";
             this.battleWonText.Size = new System.Drawing.Size(48, 25);
             this.battleWonText.TabIndex = 6;
@@ -100,17 +102,38 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 44);
+            this.label4.Location = new System.Drawing.Point(12, 105);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(98, 25);
             this.label4.TabIndex = 5;
             this.label4.Text = "Battle Won";
+            // 
+            // joiningDungeonText
+            // 
+            this.joiningDungeonText.AutoSize = true;
+            this.joiningDungeonText.ForeColor = System.Drawing.Color.Red;
+            this.joiningDungeonText.Location = new System.Drawing.Point(166, 35);
+            this.joiningDungeonText.Name = "joiningDungeonText";
+            this.joiningDungeonText.Size = new System.Drawing.Size(48, 25);
+            this.joiningDungeonText.TabIndex = 8;
+            this.joiningDungeonText.Text = "false";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(13, 35);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(147, 25);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "Joining Dungeon";
             // 
             // HalfangFarmingBot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(410, 312);
+            this.Controls.Add(this.joiningDungeonText);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.battleWonText);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.inBattleText);
@@ -136,5 +159,7 @@
         private Label inBattleText;
         private Label battleWonText;
         private Label label4;
+        private Label joiningDungeonText;
+        private Label label5;
     }
 }
