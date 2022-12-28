@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using ProjectMaelstrom.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,9 +22,15 @@ namespace ProjectMaelstrom
 
         private async void testing_Load(object sender, EventArgs e)
         {
-            string res = await ImageToText.Test("test.png");
+            LazarusResultModel lazarusResultModel = JsonConvert.DeserializeObject<LazarusResultModel>(await ImageToText.GetStringsFromImage("test.png"));
 
-            richTextBox1.Text = res;
+            foreach(ProjectMaelstrom.Models.KeyValuePair kvp in lazarusResultModel.keyValuePairs)
+            {
+                if(kvp.key.content == "HEALTH")
+                {
+                    richTextBox1.Text = kvp.value.content;
+                }
+            }
         }
     }
 }
