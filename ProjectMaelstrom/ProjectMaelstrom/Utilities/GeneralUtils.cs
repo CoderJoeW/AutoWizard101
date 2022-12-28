@@ -2,8 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+
+using ProjectMaelstrom.Models;
+
+using Newtonsoft.Json;
+using System.Windows.Forms;
 
 namespace ProjectMaelstrom.Utilities
 {
@@ -34,6 +40,31 @@ namespace ProjectMaelstrom.Utilities
             {
                 return false;
             }
+        }
+
+        public async void GetUserMana()
+        {
+            string imgKey = RandomString(20);
+            string imgPath = $"screenshots/{imgKey}.png";
+
+            _imageRecognition.TakeScreenshot(imgKey);
+
+            LazarusResultModel lazarusResultModel = JsonConvert.DeserializeObject<LazarusResultModel>(await ImageToText.GetStringsFromImage(imgPath));
+
+            foreach (ProjectMaelstrom.Models.KeyValuePair kvp in lazarusResultModel.keyValuePairs)
+            {
+                if (kvp.key.content == "MANA")
+                {
+                    string manaString = kvp.value.content;
+
+                    string[] mana = manaString.Split('/');
+
+                    StateManager.Instance.CurrentMana = int.Parse(mana[0]);
+                    StateManager.Instance.MaxMana = int.Parse(mana[1]);
+                }
+            }
+
+            File.Delete(imgPath);
         }
 
         public string RandomString(int length)
