@@ -16,5 +16,12 @@ namespace ProjectMaelstrom
         {
             InitializeComponent();
         }
+
+        private void saveSettingsBtn_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default["Lazarus_Organization_Id"] = lazarusOrgId.Text;
+            Properties.Settings.Default["Lazarus_Auth_Key"] = lazarusAuthKey.Text;
+            this.Close();
+        }
     }
 }
