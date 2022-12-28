@@ -29,7 +29,7 @@ namespace ProjectMaelstrom
             return new Point(rect.X, rect.Y);
         }
 
-        private Bitmap TakeScreenshot(string imgKey)
+        public Bitmap TakeScreenshot(string imgKey)
         {
             var bmpScreenshot = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, PixelFormat.Format24bppRgb);
 
