@@ -1,6 +1,6 @@
 ﻿namespace ProjectMaelstrom
 {
-    partial class Settings
+    partial class SettingsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -77,7 +77,7 @@
             this.saveSettingsBtn.UseVisualStyleBackColor = true;
             this.saveSettingsBtn.Click += new System.EventHandler(this.saveSettingsBtn_Click);
             // 
-            // Settings
+            // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -87,8 +87,9 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lazarusOrgId);
             this.Controls.Add(this.label1);
-            this.Name = "Settings";
+            this.Name = "SettingsForm";
             this.Text = "Settings";
+            this.Load += new System.EventHandler(this.SettingsForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

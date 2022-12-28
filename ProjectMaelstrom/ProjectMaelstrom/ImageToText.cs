@@ -19,8 +19,8 @@ namespace ProjectMaelstrom
                 var request = new RestRequest("/forms/generic", Method.Post);
                 request.Timeout = -1;
                 request.AddHeader("Content-Type", "multipart/form-data");
-                request.AddHeader("orgId", Properties.Resources.Lazarus_Organization_Id);
-                request.AddHeader("authKey", Properties.Resources.Lazarus_Auth_Key);
+                request.AddHeader("orgId", Properties.Settings.Default["Lazarus_Organization_Id"].ToString());
+                request.AddHeader("authKey", Properties.Settings.Default["Lazarus_Auth_Key"].ToString());
                 request.AddFile("file", path);
                 RestResponse response = await client.ExecutePostAsync(request);
                 

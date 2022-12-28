@@ -28,5 +28,12 @@ namespace ProjectMaelstrom
         {
             _stateManager.SelectedResolution = resolutionSelector.SelectedText;
         }
+
+        private void editSettingsBtn_Click(object sender, EventArgs e)
+        {
+            SettingsForm sf = new SettingsForm();
+            sf.TopMost = true;
+            sf.Show();
+        }
     }
 }
