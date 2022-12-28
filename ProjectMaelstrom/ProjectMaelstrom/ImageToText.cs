@@ -11,7 +11,7 @@ namespace ProjectMaelstrom
     {
         private static string endpoint = "https://api.lazarusforms.com/api";
 
-        public static async Task<string> Test(string path)
+        public static async Task<string> GetStringsFromImage(string path)
         {
             try
             {
