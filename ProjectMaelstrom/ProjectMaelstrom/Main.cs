@@ -12,8 +12,6 @@ namespace ProjectMaelstrom
 {
     public partial class Main : Form
     {
-        private StateManager _stateManager;
-
         public Main()
         {
             InitializeComponent();
@@ -21,12 +19,12 @@ namespace ProjectMaelstrom
 
         private void Main_Load(object sender, EventArgs e)
         {
-            _stateManager= new StateManager();
+            
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _stateManager.SelectedResolution = resolutionSelector.SelectedText;
+            StateManager.Instance.SelectedResolution = resolutionSelector.SelectedText;
         }
 
         private void editSettingsBtn_Click(object sender, EventArgs e)
