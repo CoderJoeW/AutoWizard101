@@ -25,9 +25,11 @@ namespace ProjectMaelstrom
 
         public string? SelectedResolution { set; get; }
 
-        public int CurrentMana { set; get; }
-        public int MaxMana { set; get; }
+        public string CurrentMana { set; get; }
+        public string MaxMana { set; get; }
         
         public int SetMarkerCost { set; get; }
+
+        public string raw { set; get; }
     }
 }

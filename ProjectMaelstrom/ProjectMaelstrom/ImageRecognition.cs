@@ -11,11 +11,10 @@ namespace ProjectMaelstrom
 {
     internal class ImageRecognition
     {
-        private GeneralUtils _generalUtils = new GeneralUtils();
 
         public Point GetImageLocation(string lookfor)
         {
-            string imgKey = _generalUtils.RandomString(20);
+            string imgKey = GeneralUtils.Instance.RandomString(20);
             var screenBitmap = TakeScreenshot(imgKey);
             var findBitmap = new Bitmap(lookfor);
 

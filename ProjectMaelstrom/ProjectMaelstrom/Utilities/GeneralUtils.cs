@@ -15,6 +15,21 @@ namespace ProjectMaelstrom.Utilities
 {
     internal class GeneralUtils: Util
     {
+        private static GeneralUtils? _instance;
+
+        public static GeneralUtils Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new GeneralUtils();
+                }
+
+                return _instance;
+            }
+        }
+
         private Random _random = new Random();
 
         public void SetMarker()
@@ -49,7 +64,11 @@ namespace ProjectMaelstrom.Utilities
 
             _imageRecognition.TakeScreenshot(imgKey);
 
-            LazarusResultModel lazarusResultModel = JsonConvert.DeserializeObject<LazarusResultModel>(await ImageToText.GetStringsFromImage(imgPath));
+            string rawResult = await ImageToText.GetStringsFromImage(imgPath);
+
+            StateManager.Instance.raw = rawResult;
+
+            LazarusResultModel lazarusResultModel = JsonConvert.DeserializeObject<LazarusResultModel>(rawResult);
 
             foreach (ProjectMaelstrom.Models.KeyValuePair kvp in lazarusResultModel.keyValuePairs)
             {
@@ -57,14 +76,14 @@ namespace ProjectMaelstrom.Utilities
                 {
                     string manaString = kvp.value.content;
 
+                    StateManager.Instance.raw = manaString;
+
                     string[] mana = manaString.Split('/');
 
-                    StateManager.Instance.CurrentMana = int.Parse(mana[0]);
-                    StateManager.Instance.MaxMana = int.Parse(mana[1]);
+                    StateManager.Instance.CurrentMana = manaString;
+                    StateManager.Instance.MaxMana = mana[1];
                 }
             }
-
-            File.Delete(imgPath);
         }
 
         public string RandomString(int length)

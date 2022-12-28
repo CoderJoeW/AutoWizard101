@@ -28,7 +28,6 @@ namespace ProjectMaelstrom
 
         private PlayerController _playerController = new PlayerController();
         private CombatUtils _combatUtils = new CombatUtils();
-        private GeneralUtils _generalUtils = new GeneralUtils();
 
         private bool _joiningDungeon = false;
         private bool _battleStarted = false;
@@ -108,7 +107,7 @@ namespace ProjectMaelstrom
             joiningDungeonText.ForeColor = Color.DarkGreen;
 
             botState.Text = "Outside dungeon joining";
-            _generalUtils.SetMarker();
+            GeneralUtils.Instance.SetMarker();
             _combatUtils.ResetCursor();
             _playerController.Interact();
 
@@ -152,7 +151,7 @@ namespace ProjectMaelstrom
         {
             botState.Text = "Battle won teleporting to start";
 
-            bool teleported = _generalUtils.Teleport();
+            bool teleported = GeneralUtils.Instance.Teleport();
             
             if (teleported)
             {
