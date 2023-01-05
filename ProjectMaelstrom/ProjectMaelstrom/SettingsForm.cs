@@ -19,14 +19,12 @@ namespace ProjectMaelstrom
 
         private void SettingsForm_Load(object sender, EventArgs e)
         {
-            lazarusOrgId.Text = Properties.Settings.Default["Lazarus_Organization_Id"].ToString();
-            lazarusAuthKey.Text = Properties.Settings.Default["Lazarus_Auth_Key"].ToString();
+            ocrSpaceApiKey.Text = Properties.Settings.Default["OCR_SPACE_APIKEY"].ToString();
         }
 
         private void saveSettingsBtn_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default["Lazarus_Organization_Id"] = lazarusOrgId.Text;
-            Properties.Settings.Default["Lazarus_Auth_Key"] = lazarusAuthKey.Text;
+            Properties.Settings.Default["OCR_SPACE_APIKEY"] = ocrSpaceApiKey.Text;
 
             Properties.Settings.Default.Save();
 
