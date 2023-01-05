@@ -2,13 +2,10 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ProjectMaelstrom.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="Lazarus_Organization_Id" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="Lazarus_Auth_Key" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
     <Setting Name="Resolution" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="OCR_SPACE_APIKEY" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
   </Settings>

@@ -26,36 +26,24 @@ namespace ProjectMaelstrom.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Lazarus_Organization_Id {
-            get {
-                return ((string)(this["Lazarus_Organization_Id"]));
-            }
-            set {
-                this["Lazarus_Organization_Id"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Lazarus_Auth_Key {
-            get {
-                return ((string)(this["Lazarus_Auth_Key"]));
-            }
-            set {
-                this["Lazarus_Auth_Key"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string Resolution {
             get {
                 return ((string)(this["Resolution"]));
             }
             set {
                 this["Resolution"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string OCR_SPACE_APIKEY {
+            get {
+                return ((string)(this["OCR_SPACE_APIKEY"]));
+            }
+            set {
+                this["OCR_SPACE_APIKEY"] = value;
             }
         }
     }
