@@ -64,24 +64,22 @@ namespace ProjectMaelstrom.Utilities
 
             _imageRecognition.TakeScreenshot(imgKey);
 
-            string rawResult = await ImageToText.GetStringsFromImage(imgPath);
+            OcrResultModel result = await ImageToText.GetStringsFromImage("test.png");
 
-            StateManager.Instance.raw = rawResult;
+            List<string> splitText = result.ParsedResults[0].ParsedText.Split("\n").ToList();
 
-            LazarusResultModel lazarusResultModel = JsonConvert.DeserializeObject<LazarusResultModel>(rawResult);
-
-            foreach (ProjectMaelstrom.Models.KeyValuePair kvp in lazarusResultModel.keyValuePairs)
+            for (int i = 0; i < splitText.Count; i++)
             {
-                if (kvp.key.content == "MANA")
+                if (splitText[i] == "MANA")
                 {
-                    string manaString = kvp.value.content;
+                    StateManager.Instance.raw = splitText[i + 2];
 
-                    StateManager.Instance.raw = manaString;
+                    string[] mana = StateManager.Instance.raw.Split("/");
 
-                    string[] mana = manaString.Split('/');
-
-                    StateManager.Instance.CurrentMana = manaString;
+                    StateManager.Instance.CurrentMana = mana[0];
                     StateManager.Instance.MaxMana = mana[1];
+
+                    return;
                 }
             }
         }
