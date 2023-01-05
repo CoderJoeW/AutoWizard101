@@ -9,7 +9,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Tesseract;
 
 namespace ProjectMaelstrom
 {
@@ -22,13 +21,15 @@ namespace ProjectMaelstrom
 
         private async void testing_Load(object sender, EventArgs e)
         {
-            LazarusResultModel lazarusResultModel = JsonConvert.DeserializeObject<LazarusResultModel>(await ImageToText.GetStringsFromImage("test.png"));
+            OcrResultModel result = await ImageToText.GetStringsFromImage("test.png");
 
-            foreach(ProjectMaelstrom.Models.KeyValuePair kvp in lazarusResultModel.keyValuePairs)
+            List<string> testSplit = result.ParsedResults[0].ParsedText.Split("\n").ToList();
+
+            for(int i = 0; i < testSplit.Count; i++)
             {
-                if(kvp.key.content == "HEALTH")
+                if (testSplit[i] == "MANA")
                 {
-                    richTextBox1.Text = kvp.value.content;
+                    richTextBox1.Text = testSplit[i+2];
                 }
             }
         }
