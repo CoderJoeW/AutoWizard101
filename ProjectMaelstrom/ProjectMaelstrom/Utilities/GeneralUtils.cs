@@ -34,27 +34,25 @@ namespace ProjectMaelstrom.Utilities
 
         public void SetMarker()
         {
-            Point marker = _imageRecognition.GetImageLocation($"{StorageUtils.GetAppPath()}/Combat/Utils/marklocation.png");
+            Point? marker = ImageFinder.GetCoordsOfImage($"{StorageUtils.GetAppPath()}/Combat/Utils/marklocation.png");
 
-            if (marker.X > 0 && marker.Y > 0)
+            if (marker.HasValue)
             {
-                _playerController.Click(marker);
+                _playerController.Click(marker.Value);
             }
         }
 
         public bool Teleport()
         {
-            Point teleport = _imageRecognition.GetImageLocation($"{StorageUtils.GetAppPath()}/Combat/Utils/teleportto.png");
+            Point? teleport = ImageFinder.GetCoordsOfImage($"{StorageUtils.GetAppPath()}/Combat/Utils/teleportto.png");
 
-            if (teleport.X > 0 && teleport.Y > 0)
+            if (teleport.HasValue)
             {
-                _playerController.Click(teleport);
+                _playerController.Click(teleport.Value);
                 return true;
             }
-            else
-            {
-                return false;
-            }
+
+            return false;
         }
 
         public async void GetUserMana()

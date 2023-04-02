@@ -11,16 +11,14 @@ namespace ProjectMaelstrom.Utilities
     {
         public bool IsInBattle()
         {
-            Point spellbook = _imageRecognition.GetImageLocation($"{StorageUtils.GetAppPath()}/Combat/Utils/spellbook.png");
+            Point? spellbook = ImageFinder.GetCoordsOfImage($"{StorageUtils.GetAppPath()}/Combat/Utils/spellbook.png");
 
-            if (spellbook.X > 0 && spellbook.Y > 0)
+            if (spellbook.HasValue)
             {
                 return false;
             }
-            else
-            {
-                return true;
-            }
+
+            return true;
         }
 
         public bool UseCard(string cardName)
@@ -33,11 +31,11 @@ namespace ProjectMaelstrom.Utilities
             {
                 if (!matchFound)
                 {
-                    Point card = _imageRecognition.GetImageLocation(images[i]);
+                    Point? card = ImageFinder.GetCoordsOfImage(images[i]);
 
-                    if (card.X > 0 && card.Y > 0)
+                    if (card.HasValue)
                     {
-                        _playerController.Click(card);
+                        _playerController.Click(card.Value);
                         matchFound = true;
                     }
                     else
@@ -52,54 +50,49 @@ namespace ProjectMaelstrom.Utilities
 
         public bool IsMyTurn()
         {
-            Point passBtn = _imageRecognition.GetImageLocation($"{StorageUtils.GetAppPath()}/Combat/Utils/passbutton.png");
+            Point? passBtn = ImageFinder.GetCoordsOfImage($"{StorageUtils.GetAppPath()}/Combat/Utils/passbutton.png");
 
-            if (passBtn.X > 0 && passBtn.Y > 0)
+            if (passBtn.HasValue)
             {
                 return true;
             }
-            else
-            {
-                return false;
-            }
+
+            return false;
         }
 
         public void Pass()
         {
-            Point passBtn = _imageRecognition.GetImageLocation($"{StorageUtils.GetAppPath()}/Combat/Utils/passbutton.png");
+            Point? passBtn = ImageFinder.GetCoordsOfImage($"{StorageUtils.GetAppPath()}/Combat/Utils/passbutton.png");
 
-            if (passBtn.X > 0 && passBtn.Y > 0)
+            if (passBtn.HasValue)
             {
-                WinAPI.click(passBtn);
+                WinAPI.click(passBtn.Value);
             }
         }
 
         public void ResetCursor()
         {
-            Point blankSpot = _imageRecognition.GetImageLocation($"{StorageUtils.GetAppPath()}/Combat/Utils/blank.png");
+            Point? blankSpot = ImageFinder.GetCoordsOfImage($"{StorageUtils.GetAppPath()}/Combat/Utils/blank.png");
 
-            if (blankSpot.X > 0 && blankSpot.Y > 0)
+            if (blankSpot.HasValue)
             {
-                _playerController.Click(blankSpot);
+                _playerController.Click(blankSpot.Value);
+                return;
             }
-            else
-            {
-                _playerController.Click(new Point(50, 20));
-            }
+
+            _playerController.Click(new Point(50, 20));
         }
 
         public bool IsOutsideDungeon()
         {
-            Point sigil = _imageRecognition.GetImageLocation($"{StorageUtils.GetAppPath()}/Combat/Utils/sigil.png");
+            Point? sigil = ImageFinder.GetCoordsOfImage($"{StorageUtils.GetAppPath()}/Combat/Utils/sigil.png");
 
-            if (sigil.X > 0 && sigil.Y > 0)
+            if (sigil.HasValue)
             {
                 return true;
             }
-            else
-            {
-                return false;
-            }
+
+            return false;
         }
     }
 }
