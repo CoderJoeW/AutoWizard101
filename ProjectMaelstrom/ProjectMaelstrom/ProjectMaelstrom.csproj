@@ -10,9 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Emgu.CV" Version="4.6.0.5131" />
+    <PackageReference Include="Emgu.CV.runtime.windows" Version="4.6.0.5131" />
     <PackageReference Include="InputSimulator" Version="1.0.4" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
-    <PackageReference Include="RestSharp" Version="108.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="RestSharp" Version="109.0.1" />
   </ItemGroup>
 
   <ItemGroup>
