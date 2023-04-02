@@ -23,7 +23,7 @@ namespace ProjectMaelstrom
             }
         }
 
-        public string? SelectedResolution { set; get; }
+        public string? SelectedResolution { set; get; } = "1280x720";
 
         public string CurrentMana { set; get; }
         public string MaxMana { set; get; }
