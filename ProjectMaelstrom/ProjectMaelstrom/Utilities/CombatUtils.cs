@@ -70,7 +70,7 @@ namespace ProjectMaelstrom.Utilities
             }
         }
 
-        public void ResetCursor()
+        public void ResetCursorPosition()
         {
             Point? blankSpot = ImageFinder.GetCoordsOfImage($"{StorageUtils.GetAppPath()}/Combat/Utils/blank.png");
 

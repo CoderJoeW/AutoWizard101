@@ -84,7 +84,7 @@ namespace ProjectMaelstrom
             UpdateJoiningDungeonState(true);
             UpdateBotState("Outside dungeon joining");
             GeneralUtils.Instance.SetMarker();
-            _combatUtils.ResetCursor();
+            _combatUtils.ResetCursorPosition();
             _playerController.Interact();
             UpdateJoiningDungeonState(false);
         }
@@ -106,7 +106,7 @@ namespace ProjectMaelstrom
                 _combatUtils.Pass();
             }
 
-            _combatUtils.ResetCursor();
+            _combatUtils.ResetCursorPosition();
         }
 
         private void HandleBattleOver()
@@ -126,7 +126,7 @@ namespace ProjectMaelstrom
 
             if (teleported)
             {
-                _combatUtils.ResetCursor();
+                _combatUtils.ResetCursorPosition();
                 UpdateBattleWonState(false);
             }
         }

@@ -131,7 +131,7 @@ namespace ProjectMaelstrom
 
                 Thread.Sleep(100);
 
-                ResetCursor();
+                ResetCursorPosition();
             }
             else
             {
@@ -169,7 +169,7 @@ namespace ProjectMaelstrom
             if (refreshBtn.X > 0 && refreshBtn.Y > 0)
             {
                 WinAPI.click(refreshBtn);
-                ResetCursor();
+                ResetCursorPosition();
             }
         }
 
@@ -189,7 +189,7 @@ namespace ProjectMaelstrom
             }
         }
 
-        private void ResetCursor()
+        private void ResetCursorPosition()
         {
             Point blankSpot = _image_recognition.GetImageLocation($"{resolutionSelector.Text}/Bazaar/BazaarUtils/blank.png");
 
