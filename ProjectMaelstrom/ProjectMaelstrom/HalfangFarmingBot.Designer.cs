@@ -2,15 +2,8 @@
 {
     partial class HalfangFarmingBot
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,10 +15,6 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             button1 = new Button();
@@ -41,101 +30,102 @@
             // 
             // button1
             // 
-            button1.Location = new Point(348, 2);
-            button1.Margin = new Padding(5, 6, 5, 6);
+            button1.Location = new Point(160, 290);
             button1.Name = "button1";
-            button1.Size = new Size(128, 46);
+            button1.Size = new Size(172, 46);
             button1.TabIndex = 0;
             button1.Text = "Start/Stop Bot";
             button1.UseVisualStyleBackColor = true;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.FlatAppearance.BorderSize = 0;
             button1.Click += button1_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(16, 199);
-            label1.Margin = new Padding(5, 0, 5, 0);
+            label1.Location = new Point(40, 20);
             label1.Name = "label1";
-            label1.Size = new Size(59, 30);
+            label1.Size = new Size(110, 20);
             label1.TabIndex = 1;
-            label1.Text = "State";
+            label1.Text = "Bot State:";
+            label1.Font = new Font(label1.Font.FontFamily, 10);
             // 
             // botState
             // 
             botState.AutoSize = true;
-            botState.Location = new Point(86, 199);
-            botState.Margin = new Padding(5, 0, 5, 0);
+            botState.Location = new Point(160, 20);
             botState.Name = "botState";
-            botState.Size = new Size(68, 30);
+            botState.Size = new Size(80, 20);
             botState.TabIndex = 2;
-            botState.Text = "label2";
+            botState.Text = "Idle";
+            botState.Font = new Font(botState.Font.FontFamily, 10);
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(16, 84);
-            label2.Margin = new Padding(4, 0, 4, 0);
+            label2.Location = new Point(40, 50);
             label2.Name = "label2";
-            label2.Size = new Size(90, 30);
+            label2.Size = new Size(100, 20);
             label2.TabIndex = 3;
-            label2.Text = "In Battle";
+            label2.Text = "In Battle:";
+            label2.Font = new Font(label2.Font.FontFamily, 10);
             // 
             // inBattleText
             // 
             inBattleText.AutoSize = true;
             inBattleText.ForeColor = Color.Red;
-            inBattleText.Location = new Point(114, 84);
-            inBattleText.Margin = new Padding(4, 0, 4, 0);
+            inBattleText.Location = new Point(160, 50);
             inBattleText.Name = "inBattleText";
-            inBattleText.Size = new Size(56, 30);
+            inBattleText.Size = new Size(30, 20);
             inBattleText.TabIndex = 4;
-            inBattleText.Text = "false";
+            inBattleText.Text = "No";
+            inBattleText.Font = new Font(inBattleText.Font.FontFamily, 10);
             // 
             // battleWonText
             // 
             battleWonText.AutoSize = true;
             battleWonText.ForeColor = Color.Red;
-            battleWonText.Location = new Point(139, 126);
-            battleWonText.Margin = new Padding(4, 0, 4, 0);
+            battleWonText.Location = new Point(160, 80);
             battleWonText.Name = "battleWonText";
-            battleWonText.Size = new Size(56, 30);
+            battleWonText.Size = new Size(30, 20);
             battleWonText.TabIndex = 6;
-            battleWonText.Text = "false";
+            battleWonText.Text = "No";
+            battleWonText.Font = new Font(battleWonText.Font.FontFamily, 10);
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(14, 126);
-            label4.Margin = new Padding(4, 0, 4, 0);
+            label4.Location = new Point(40, 80);
             label4.Name = "label4";
-            label4.Size = new Size(115, 30);
+            label4.Size = new Size(110, 20);
             label4.TabIndex = 5;
-            label4.Text = "Battle Won";
-            // 
+            label4.Text = "Battle Won:";
+            label4.Font = new Font(label4.Font.FontFamily, 10);
+            //
             // joiningDungeonText
-            // 
+            //
             joiningDungeonText.AutoSize = true;
             joiningDungeonText.ForeColor = Color.Red;
-            joiningDungeonText.Location = new Point(199, 42);
-            joiningDungeonText.Margin = new Padding(4, 0, 4, 0);
+            joiningDungeonText.Location = new Point(240, 110);
             joiningDungeonText.Name = "joiningDungeonText";
-            joiningDungeonText.Size = new Size(56, 30);
+            joiningDungeonText.Size = new Size(30, 20);
             joiningDungeonText.TabIndex = 8;
-            joiningDungeonText.Text = "false";
-            // 
+            joiningDungeonText.Text = "No";
+            joiningDungeonText.Font = new Font(joiningDungeonText.Font.FontFamily, 10);
+            //
             // label5
-            // 
+            //
             label5.AutoSize = true;
-            label5.Location = new Point(16, 42);
-            label5.Margin = new Padding(4, 0, 4, 0);
+            label5.Location = new Point(40, 110);
             label5.Name = "label5";
-            label5.Size = new Size(171, 30);
+            label5.Size = new Size(190, 20);
             label5.TabIndex = 7;
-            label5.Text = "Joining Dungeon";
-            // 
+            label5.Text = "Joining Dungeon:";
+            label5.Font = new Font(label5.Font.FontFamily, 10);
+            //
             // HalfangFarmingBot
-            // 
-            AutoScaleDimensions = new SizeF(12F, 30F);
+            //
+            AutoScaleDimensions = new SizeF(9F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(492, 374);
             Controls.Add(joiningDungeonText);
@@ -147,14 +137,13 @@
             Controls.Add(botState);
             Controls.Add(label1);
             Controls.Add(button1);
-            Margin = new Padding(5, 6, 5, 6);
+            Margin = new Padding(4, 4, 4, 4);
             Name = "HalfangFarmingBot";
-            Text = "HalfangFarmingBot";
+            Text = "Halfang Farming Bot";
             Load += HalfangFarmingBot_Load;
             ResumeLayout(false);
             PerformLayout();
         }
-
         #endregion
 
         private Button button1;
