@@ -127,6 +127,8 @@
 
   <ItemGroup>
     <None Remove="C:\Users\jwilliamson\.nuget\packages\tesseract\5.2.0\build\\..\x86\tesseract50.dll" />
+    <None Remove="LICENSE" />
+    <None Remove="README.md" />
   </ItemGroup>
 
 </Project>
