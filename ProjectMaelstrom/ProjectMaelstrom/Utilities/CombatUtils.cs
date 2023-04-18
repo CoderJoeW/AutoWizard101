@@ -11,7 +11,7 @@ namespace ProjectMaelstrom.Utilities
     {
         public bool IsInBattle()
         {
-            Point? spellbook = ImageFinder.GetCoordsOfImage($"{StorageUtils.GetAppPath()}/Combat/Utils/spellbook.png");
+            Point? spellbook = ImageFinder.RetrieveTargetImagePositionInScreenshot($"{StorageUtils.GetAppPath()}/Combat/Utils/spellbook.png");
 
             if (spellbook.HasValue)
             {
@@ -31,7 +31,7 @@ namespace ProjectMaelstrom.Utilities
             {
                 if (!matchFound)
                 {
-                    Point? card = ImageFinder.GetCoordsOfImage(images[i]);
+                    Point? card = ImageFinder.RetrieveTargetImagePositionInScreenshot(images[i]);
 
                     if (card.HasValue)
                     {
@@ -50,7 +50,7 @@ namespace ProjectMaelstrom.Utilities
 
         public bool IsMyTurn()
         {
-            Point? passBtn = ImageFinder.GetCoordsOfImage($"{StorageUtils.GetAppPath()}/Combat/Utils/passbutton.png");
+            Point? passBtn = ImageFinder.RetrieveTargetImagePositionInScreenshot($"{StorageUtils.GetAppPath()}/Combat/Utils/passbutton.png");
 
             if (passBtn.HasValue)
             {
@@ -62,7 +62,7 @@ namespace ProjectMaelstrom.Utilities
 
         public void Pass()
         {
-            Point? passBtn = ImageFinder.GetCoordsOfImage($"{StorageUtils.GetAppPath()}/Combat/Utils/passbutton.png");
+            Point? passBtn = ImageFinder.RetrieveTargetImagePositionInScreenshot($"{StorageUtils.GetAppPath()}/Combat/Utils/passbutton.png");
 
             if (passBtn.HasValue)
             {
@@ -72,7 +72,7 @@ namespace ProjectMaelstrom.Utilities
 
         public void ResetCursorPosition()
         {
-            Point? blankSpot = ImageFinder.GetCoordsOfImage($"{StorageUtils.GetAppPath()}/Combat/Utils/blank.png");
+            Point? blankSpot = ImageFinder.RetrieveTargetImagePositionInScreenshot($"{StorageUtils.GetAppPath()}/Combat/Utils/blank.png");
 
             if (blankSpot.HasValue)
             {
@@ -85,7 +85,7 @@ namespace ProjectMaelstrom.Utilities
 
         public bool IsOutsideDungeon()
         {
-            Point? sigil = ImageFinder.GetCoordsOfImage($"{StorageUtils.GetAppPath()}/Combat/Utils/sigil.png");
+            Point? sigil = ImageFinder.RetrieveTargetImagePositionInScreenshot($"{StorageUtils.GetAppPath()}/Combat/Utils/sigil.png");
 
             if (sigil.HasValue)
             {

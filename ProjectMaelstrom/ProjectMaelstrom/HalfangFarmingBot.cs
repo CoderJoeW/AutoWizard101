@@ -69,7 +69,7 @@ namespace ProjectMaelstrom
 
         private bool IsBattleStarted()
         {
-            Point? bristlecrown = ImageFinder.GetCoordsOfImage($"{StorageUtils.GetAppPath()}/Halfang/bristlecrown.png");
+            Point? bristlecrown = ImageFinder.RetrieveTargetImagePositionInScreenshot($"{StorageUtils.GetAppPath()}/Halfang/bristlecrown.png");
 
             if (bristlecrown.HasValue)
             {

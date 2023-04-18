@@ -34,7 +34,7 @@ namespace ProjectMaelstrom.Utilities
 
         public void SetMarker()
         {
-            Point? marker = ImageFinder.GetCoordsOfImage($"{StorageUtils.GetAppPath()}/Combat/Utils/marklocation.png");
+            Point? marker = ImageFinder.RetrieveTargetImagePositionInScreenshot($"{StorageUtils.GetAppPath()}/Combat/Utils/marklocation.png");
 
             if (marker.HasValue)
             {
@@ -44,7 +44,7 @@ namespace ProjectMaelstrom.Utilities
 
         public bool Teleport()
         {
-            Point? teleport = ImageFinder.GetCoordsOfImage($"{StorageUtils.GetAppPath()}/Combat/Utils/teleportto.png");
+            Point? teleport = ImageFinder.RetrieveTargetImagePositionInScreenshot($"{StorageUtils.GetAppPath()}/Combat/Utils/teleportto.png");
 
             if (teleport.HasValue)
             {
@@ -58,9 +58,7 @@ namespace ProjectMaelstrom.Utilities
         public async void GetUserMana()
         {
             string imgKey = RandomString(20);
-            string imgPath = $"screenshots/{imgKey}.png";
-
-            _imageRecognition.TakeScreenshot(imgKey);
+            string imgPath = ImageFinder.CaptureScreen();
 
             OcrResultModel result = await ImageToText.GetStringsFromImage("test.png");
 
