@@ -14,23 +14,23 @@ namespace ProjectMaelstrom.Modules.ImageRecognition
 {
     internal class ImageFinder
     {
-        public static Point? FindImageInImage(string imagePath2)
+        public static Point? FindImageInImage(string targetImagePath)
         {
-            using var image1 = new Image<Bgr, byte>(TakeScreenshot()).Convert<Hsv, byte>();
-            using var image2 = new Image<Bgr, byte>(imagePath2).Convert<Hsv, byte>();
+            using var mainImage = new Image<Bgr, byte>(TakeScreenshot()).Convert<Hsv, byte>();
+            using var targetImage = new Image<Bgr, byte>(targetImagePath).Convert<Hsv, byte>();
 
-            var resultWidth = image1.Width - image2.Width + 1;
-            var resultHeight = image1.Height - image2.Height + 1;
+            var resultWidth = mainImage.Width - targetImage.Width + 1;
+            var resultHeight = mainImage.Height - targetImage.Height + 1;
 
-            using var result = new Image<Gray, float>(resultWidth, resultHeight);
-            CvInvoke.MatchTemplate(image1, image2, result, TemplateMatchingType.CcoeffNormed);
+            using var matchResult = new Image<Gray, float>(resultWidth, resultHeight);
+            CvInvoke.MatchTemplate(mainImage, targetImage, matchResult, TemplateMatchingType.CcoeffNormed);
 
             double[] minValues, maxValues;
             Point[] minLocations, maxLocations;
-            result.MinMax(out minValues, out maxValues, out minLocations, out maxLocations);
+            matchResult.MinMax(out minValues, out maxValues, out minLocations, out maxLocations);
 
-            var threshold = 0.8;
-            if (maxValues[0] >= threshold)
+            var matchingThreshold = 0.8;
+            if (maxValues[0] >= matchingThreshold)
             {
                 return maxLocations[0];
             }
@@ -38,17 +38,17 @@ namespace ProjectMaelstrom.Modules.ImageRecognition
             return null;
         }
 
-        public static Point? GetCoordsOfImage(string image2)
+        public static Point? GetCoordinatesOfImage(string targetImage)
         {
-            Point? location = FindImageInImage(image2);
+            Point? location = FindImageInImage(targetImage);
 
             return location;
         }
 
         public static string TakeScreenshot()
         {
-            string imgKey = GeneralUtils.Instance.RandomString(20);
-            string imageLocation = $"screenshots/{imgKey}.png";
+            string imageName = GeneralUtils.Instance.RandomString(20);
+            string imageLocation = $"screenshots/{imageName}.png";
 
             using (var bmpScreenshot = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, PixelFormat.Format24bppRgb))
             {
