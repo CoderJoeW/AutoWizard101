@@ -14,20 +14,20 @@ namespace ProjectMaelstrom.Modules.ImageRecognition
 {
     internal class ImageFinder
     {
-        public static Point? FindTargetImageInMainImage(string targetImagePath)
+        public static Point? SearchForTargetImageWithinScreenshot(string targetImagePath)
         {
-            using var mainImage = new Image<Bgr, byte>(CaptureScreenshot()).Convert<Hsv, byte>();
+            using var capturedScreenshot = new Image<Bgr, byte>(CaptureScreen()).Convert<Hsv, byte>();
             using var targetImage = new Image<Bgr, byte>(targetImagePath).Convert<Hsv, byte>();
 
-            var resultWidth = mainImage.Width - targetImage.Width + 1;
-            var resultHeight = mainImage.Height - targetImage.Height + 1;
+            var comparisonWidth = capturedScreenshot.Width - targetImage.Width + 1;
+            var comparisonHeight = capturedScreenshot.Height - targetImage.Height + 1;
 
-            using var matchResultImage = new Image<Gray, float>(resultWidth, resultHeight);
-            CvInvoke.MatchTemplate(mainImage, targetImage, matchResultImage, TemplateMatchingType.CcoeffNormed);
+            using var matchingResult = new Image<Gray, float>(comparisonWidth, comparisonHeight);
+            CvInvoke.MatchTemplate(capturedScreenshot, targetImage, matchingResult, TemplateMatchingType.CcoeffNormed);
 
             double[] minValues, maxValues;
             Point[] minLocations, maxLocations;
-            matchResultImage.MinMax(out minValues, out maxValues, out minLocations, out maxLocations);
+            matchingResult.MinMax(out minValues, out maxValues, out minLocations, out maxLocations);
 
             var matchingThreshold = 0.8;
             if (maxValues[0] >= matchingThreshold)
@@ -38,28 +38,28 @@ namespace ProjectMaelstrom.Modules.ImageRecognition
             return null;
         }
 
-        public static Point? GetTargetImageCoordinates(string targetImagePath)
+        public static Point? RetrieveTargetImagePositionInScreenshot(string targetImagePath)
         {
-            Point? location = FindTargetImageInMainImage(targetImagePath);
+            Point? position = SearchForTargetImageWithinScreenshot(targetImagePath);
 
-            return location;
+            return position;
         }
 
-        public static string CaptureScreenshot()
+        public static string CaptureScreen()
         {
-            string randomImageName = GeneralUtils.Instance.RandomString(20);
-            string screenshotLocation = $"screenshots/{randomImageName}.png";
+            string randomScreenshotName = GeneralUtils.Instance.RandomString(20);
+            string screenshotFilePath = $"screenshots/{randomScreenshotName}.png";
 
             using (var bitmapScreenshot = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, PixelFormat.Format24bppRgb))
             {
                 using (var graphicsScreenshot = Graphics.FromImage(bitmapScreenshot))
                 {
                     graphicsScreenshot.CopyFromScreen(Screen.PrimaryScreen.Bounds.Location, Point.Empty, Screen.PrimaryScreen.Bounds.Size, CopyPixelOperation.SourceCopy);
-                    bitmapScreenshot.Save(screenshotLocation, ImageFormat.Png);
+                    bitmapScreenshot.Save(screenshotFilePath, ImageFormat.Png);
                 }
             }
 
-            return screenshotLocation;
+            return screenshotFilePath;
         }
     }
 }
