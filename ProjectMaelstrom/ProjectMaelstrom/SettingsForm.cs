@@ -25,8 +25,11 @@ namespace ProjectMaelstrom
         private void saveSettingsBtn_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default["OCR_SPACE_APIKEY"] = ocrSpaceApiKey.Text;
+            Properties.Settings.Default["GAME_RESOLUTION"] = selectedGameResolution.Text;
 
             Properties.Settings.Default.Save();
+
+            StateManager.Instance.SelectedResolution = selectedGameResolution.Text;
 
             this.Close();
         }

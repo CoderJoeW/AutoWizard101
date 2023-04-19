@@ -30,21 +30,12 @@ namespace ProjectMaelstrom
                 resolution = "1280x720";
             }
 
-            resolutionSelector.Text = resolution;
             StateManager.Instance.SelectedResolution = resolution;
         }
 
         private void _refreshManaTimer_Elapsed(object? sender, ElapsedEventArgs e)
         {
             manaAmountLabel.Text = $"{StateManager.Instance.CurrentMana.ToString()}/{StateManager.Instance.MaxMana.ToString()}";
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            StateManager.Instance.SelectedResolution = resolutionSelector.SelectedText;
-
-            Properties.Settings.Default["Resolution"] = resolutionSelector.SelectedText;
-            Properties.Settings.Default.Save();
         }
 
         private void editSettingsBtn_Click(object sender, EventArgs e)

@@ -32,8 +32,6 @@
             editSettingsBtn = new Button();
             manaAmountLabel = new Label();
             label2 = new Label();
-            label1 = new Label();
-            resolutionSelector = new ComboBox();
             startConfigurationBtn = new Button();
             panel2 = new Panel();
             loadHalfangBotBtn = new Button();
@@ -45,8 +43,6 @@
             panel1.Controls.Add(editSettingsBtn);
             panel1.Controls.Add(manaAmountLabel);
             panel1.Controls.Add(label2);
-            panel1.Controls.Add(label1);
-            panel1.Controls.Add(resolutionSelector);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Margin = new Padding(5, 6, 5, 6);
@@ -68,7 +64,7 @@
             // manaAmountLabel
             // 
             manaAmountLabel.AutoSize = true;
-            manaAmountLabel.Location = new Point(501, 24);
+            manaAmountLabel.Location = new Point(102, 18);
             manaAmountLabel.Margin = new Padding(5, 0, 5, 0);
             manaAmountLabel.Name = "manaAmountLabel";
             manaAmountLabel.Size = new Size(87, 30);
@@ -78,34 +74,12 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(422, 24);
+            label2.Location = new Point(21, 18);
             label2.Margin = new Padding(5, 0, 5, 0);
             label2.Name = "label2";
             label2.Size = new Size(71, 30);
             label2.TabIndex = 2;
             label2.Text = "Mana:";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(21, 24);
-            label1.Margin = new Padding(5, 0, 5, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(171, 30);
-            label1.TabIndex = 1;
-            label1.Text = "Select Resolution";
-            // 
-            // resolutionSelector
-            // 
-            resolutionSelector.FormattingEnabled = true;
-            resolutionSelector.Items.AddRange(new object[] { "1280x720", "1024x768", "2256x1504" });
-            resolutionSelector.Location = new Point(197, 18);
-            resolutionSelector.Margin = new Padding(5, 6, 5, 6);
-            resolutionSelector.Name = "resolutionSelector";
-            resolutionSelector.Size = new Size(191, 38);
-            resolutionSelector.TabIndex = 0;
-            resolutionSelector.Text = "1024x768";
-            resolutionSelector.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // startConfigurationBtn
             // 
@@ -158,8 +132,6 @@
         #endregion
 
         private Panel panel1;
-        private Label label1;
-        private ComboBox resolutionSelector;
         private Label manaAmountLabel;
         private Label label2;
         private Button editSettingsBtn;

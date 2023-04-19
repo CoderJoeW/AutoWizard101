@@ -28,51 +28,77 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.ocrSpaceApiKey = new System.Windows.Forms.TextBox();
-            this.saveSettingsBtn = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            label1 = new Label();
+            ocrSpaceApiKey = new TextBox();
+            saveSettingsBtn = new Button();
+            label2 = new Label();
+            selectedGameResolution = new ComboBox();
+            SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(165, 25);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "OCR Space API Key";
+            label1.AutoSize = true;
+            label1.Location = new Point(14, 11);
+            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(193, 30);
+            label1.TabIndex = 0;
+            label1.Text = "OCR Space API Key";
             // 
             // ocrSpaceApiKey
             // 
-            this.ocrSpaceApiKey.Location = new System.Drawing.Point(12, 37);
-            this.ocrSpaceApiKey.Name = "ocrSpaceApiKey";
-            this.ocrSpaceApiKey.Size = new System.Drawing.Size(300, 31);
-            this.ocrSpaceApiKey.TabIndex = 1;
+            ocrSpaceApiKey.Location = new Point(14, 44);
+            ocrSpaceApiKey.Margin = new Padding(4, 4, 4, 4);
+            ocrSpaceApiKey.Name = "ocrSpaceApiKey";
+            ocrSpaceApiKey.Size = new Size(359, 35);
+            ocrSpaceApiKey.TabIndex = 1;
             // 
             // saveSettingsBtn
             // 
-            this.saveSettingsBtn.Location = new System.Drawing.Point(12, 96);
-            this.saveSettingsBtn.Name = "saveSettingsBtn";
-            this.saveSettingsBtn.Size = new System.Drawing.Size(300, 34);
-            this.saveSettingsBtn.TabIndex = 4;
-            this.saveSettingsBtn.Text = "Save";
-            this.saveSettingsBtn.UseVisualStyleBackColor = true;
-            this.saveSettingsBtn.Click += new System.EventHandler(this.saveSettingsBtn_Click);
+            saveSettingsBtn.Location = new Point(13, 178);
+            saveSettingsBtn.Margin = new Padding(4, 4, 4, 4);
+            saveSettingsBtn.Name = "saveSettingsBtn";
+            saveSettingsBtn.Size = new Size(360, 41);
+            saveSettingsBtn.TabIndex = 4;
+            saveSettingsBtn.Text = "Save";
+            saveSettingsBtn.UseVisualStyleBackColor = true;
+            saveSettingsBtn.Click += saveSettingsBtn_Click;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(12, 95);
+            label2.Name = "label2";
+            label2.Size = new Size(231, 30);
+            label2.TabIndex = 5;
+            label2.Text = "Select Game Resolution";
+            // 
+            // selectedGameResolution
+            // 
+            selectedGameResolution.FormattingEnabled = true;
+            selectedGameResolution.Items.AddRange(new object[] { "1280x720" });
+            selectedGameResolution.Location = new Point(14, 133);
+            selectedGameResolution.Name = "selectedGameResolution";
+            selectedGameResolution.Size = new Size(359, 38);
+            selectedGameResolution.TabIndex = 6;
+            selectedGameResolution.Text = "1280x720";
             // 
             // SettingsForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(324, 154);
-            this.Controls.Add(this.saveSettingsBtn);
-            this.Controls.Add(this.ocrSpaceApiKey);
-            this.Controls.Add(this.label1);
-            this.Name = "SettingsForm";
-            this.Text = "Settings";
-            this.Load += new System.EventHandler(this.SettingsForm_Load);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(12F, 30F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(389, 243);
+            Controls.Add(selectedGameResolution);
+            Controls.Add(label2);
+            Controls.Add(saveSettingsBtn);
+            Controls.Add(ocrSpaceApiKey);
+            Controls.Add(label1);
+            Margin = new Padding(4, 4, 4, 4);
+            Name = "SettingsForm";
+            Text = "Settings";
+            Load += SettingsForm_Load;
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -80,5 +106,7 @@
         private Label label1;
         private TextBox ocrSpaceApiKey;
         private Button saveSettingsBtn;
+        private Label label2;
+        private ComboBox selectedGameResolution;
     }
 }
