@@ -98,7 +98,7 @@
             // resolutionSelector
             // 
             resolutionSelector.FormattingEnabled = true;
-            resolutionSelector.Items.AddRange(new object[] { "1024x768", "1280x720", "2256x1504" });
+            resolutionSelector.Items.AddRange(new object[] { "1280x720", "1024x768", "2256x1504" });
             resolutionSelector.Location = new Point(197, 18);
             resolutionSelector.Margin = new Padding(5, 6, 5, 6);
             resolutionSelector.Name = "resolutionSelector";
