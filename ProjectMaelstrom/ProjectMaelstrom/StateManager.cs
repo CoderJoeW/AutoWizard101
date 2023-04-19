@@ -29,7 +29,5 @@ namespace ProjectMaelstrom
         public int MaxMana { set; get; }
         
         public int SetMarkerCost { set; get; }
-
-        public string raw { set; get; }
     }
 }
