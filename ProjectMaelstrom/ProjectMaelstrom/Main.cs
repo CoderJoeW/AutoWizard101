@@ -1,21 +1,14 @@
-﻿using ProjectMaelstrom.Utilities;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Timers;
-using System.Windows.Forms;
+﻿using System.Timers;
 using Timer = System.Timers.Timer;
+
+using ProjectMaelstrom.Modules.ImageRecognition;
+using ProjectMaelstrom.Utilities;
 
 namespace ProjectMaelstrom
 {
     public partial class Main : Form
     {
-        private Timer _refreshManaTimer;
+        private Timer _manaRefreshTimer;
 
         public Main()
         {
@@ -25,10 +18,10 @@ namespace ProjectMaelstrom
 
         private void Main_Load(object sender, EventArgs e)
         {
-            _refreshManaTimer = new Timer(TimeSpan.FromSeconds(10));
-            _refreshManaTimer.Elapsed +=_refreshManaTimer_Elapsed;
-            _refreshManaTimer.AutoReset = true;
-            _refreshManaTimer.Start();
+            _manaRefreshTimer = new Timer(TimeSpan.FromSeconds(10));
+            _manaRefreshTimer.Elapsed += _refreshManaTimer_Elapsed;
+            _manaRefreshTimer.AutoReset = true;
+            _manaRefreshTimer.Start();
 
             string resolution = Properties.Settings.Default["Resolution"].ToString();
 
@@ -43,8 +36,7 @@ namespace ProjectMaelstrom
 
         private void _refreshManaTimer_Elapsed(object? sender, ElapsedEventArgs e)
         {
-            manaAmountLabel.Text = $"{StateManager.Instance.CurrentMana}/{StateManager.Instance.MaxMana}";
-            richTextBox1.Text = StateManager.Instance.raw;
+            manaAmountLabel.Text = $"{StateManager.Instance.CurrentMana.ToString()}/{StateManager.Instance.MaxMana.ToString()}";
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -57,14 +49,55 @@ namespace ProjectMaelstrom
 
         private void editSettingsBtn_Click(object sender, EventArgs e)
         {
-            SettingsForm sf = new SettingsForm();
-            sf.TopMost = true;
-            sf.Show();
+            SettingsForm settingsForm = new SettingsForm();
+            settingsForm.TopMost = true;
+            settingsForm.Show();
         }
 
-        private void startConfigurationBtn_Click(object sender, EventArgs e)
+        private async void startConfigurationBtn_Click(object sender, EventArgs e)
         {
-            GeneralUtils.Instance.GetUserMana();
+            while (!GeneralUtils.Instance.IsGameVisible())
+            {
+                GeneralUtils.Instance.OpenGameWindow();
+                Thread.Sleep(500);
+            }
+
+            while (!GeneralUtils.Instance.IsStatsPageVisible())
+            {
+                GeneralUtils.Instance.OpenStatsWindow();
+                Thread.Sleep(500);
+            }
+
+            string imagePath = ImageFinder.CaptureScreen();
+
+            string extractedText = await ImageHelpers.ExtractTextFromImage(imagePath);
+
+            string[] extractedTextArray = extractedText.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+
+            string mana = "";
+
+            for (int i = 0; i < extractedTextArray.Length; i++)
+            {
+                if (extractedTextArray[i] == "GOLD")
+                {
+                    mana = extractedTextArray[i - 1];
+                }
+            }
+
+            string[] manaArray = mana.Split(new[] { "/" }, StringSplitOptions.None);
+
+            StateManager.Instance.CurrentMana = int.Parse(manaArray[0]);
+            StateManager.Instance.MaxMana = int.Parse(manaArray[1]);
+        }
+
+        private void loadHalfangBotBtn_Click(object sender, EventArgs e)
+        {
+            HalfangFarmingBot halfangFarmingBot = new HalfangFarmingBot();
+            halfangFarmingBot.TopLevel = false;
+            halfangFarmingBot.FormBorderStyle = FormBorderStyle.None;
+
+            panel2.Controls.Add(halfangFarmingBot);
+            halfangFarmingBot.Show();
         }
     }
 }
