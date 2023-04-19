@@ -10,6 +10,7 @@ using ProjectMaelstrom.Models;
 
 using Newtonsoft.Json;
 using System.Windows.Forms;
+using Tesseract;
 
 namespace ProjectMaelstrom.Utilities
 {
@@ -55,29 +56,48 @@ namespace ProjectMaelstrom.Utilities
             return false;
         }
 
-        public async void GetUserMana()
+        public void OpenGameWindow()
         {
-            string imgKey = RandomString(20);
-            string imgPath = ImageFinder.CaptureScreen();
+            Point? gameWindowIcon = ImageFinder.RetrieveTargetImagePositionInScreenshot($"{StorageUtils.GetAppPath()}/General/window_taskbar_icon.png");
 
-            OcrResultModel result = await ImageToText.GetStringsFromImage("test.png");
-
-            List<string> splitText = result.ParsedResults[0].ParsedText.Split("\n").ToList();
-
-            for (int i = 0; i < splitText.Count; i++)
+            if(gameWindowIcon.HasValue)
             {
-                if (splitText[i] == "MANA")
-                {
-                    StateManager.Instance.raw = splitText[i + 2];
-
-                    string[] mana = StateManager.Instance.raw.Split("/");
-
-                    StateManager.Instance.CurrentMana = mana[0];
-                    StateManager.Instance.MaxMana = mana[1];
-
-                    return;
-                }
+                _playerController.Click(gameWindowIcon.Value);
             }
+        }
+
+        public void OpenStatsWindow()
+        {
+            Point? spellbookIcon = ImageFinder.RetrieveTargetImagePositionInScreenshot($"{StorageUtils.GetAppPath()}/General/spellbook.png");
+
+            if (spellbookIcon.HasValue)
+            {
+                _playerController.Click(spellbookIcon.Value);
+            }
+        }
+
+        public bool IsGameVisible()
+        {
+            Point? windowVisible = ImageFinder.RetrieveTargetImagePositionInScreenshot($"{StorageUtils.GetAppPath()}/General/window_header.png");
+
+            if (windowVisible.HasValue)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool IsStatsPageVisible()
+        {
+            Point? statsPageVisible = ImageFinder.RetrieveTargetImagePositionInScreenshot($"{StorageUtils.GetAppPath()}/General/spellbook_homepage.png");
+
+            if (statsPageVisible.HasValue)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         public string RandomString(int length)
