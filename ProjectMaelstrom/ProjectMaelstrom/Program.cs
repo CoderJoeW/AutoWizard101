@@ -17,8 +17,8 @@ namespace ProjectMaelstrom
             }
 
             ApplicationConfiguration.Initialize();
-            Application.Run(new HalfangFarmingBot());
-            //Application.Run(new Main());
+            //Application.Run(new HalfangFarmingBot());
+            Application.Run(new Main());
             //Application.Run(new testing());
         }
     }
