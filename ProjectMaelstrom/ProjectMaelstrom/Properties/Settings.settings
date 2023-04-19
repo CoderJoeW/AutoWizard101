@@ -2,7 +2,7 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ProjectMaelstrom.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="Resolution" Type="System.String" Scope="User">
+    <Setting Name="GAME_RESOLUTION" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="OCR_SPACE_APIKEY" Type="System.String" Scope="User">
