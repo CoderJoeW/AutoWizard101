@@ -23,14 +23,7 @@ namespace ProjectMaelstrom
             _manaRefreshTimer.AutoReset = true;
             _manaRefreshTimer.Start();
 
-            string resolution = Properties.Settings.Default["Resolution"].ToString();
-
-            if (string.IsNullOrEmpty(resolution))
-            {
-                resolution = "1280x720";
-            }
-
-            StateManager.Instance.SelectedResolution = resolution;
+            StateManager.Instance.SelectedResolution = "1280x720";
         }
 
         private void _refreshManaTimer_Elapsed(object? sender, ElapsedEventArgs e)
