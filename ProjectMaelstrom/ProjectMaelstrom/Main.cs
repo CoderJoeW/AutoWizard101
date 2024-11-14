@@ -94,5 +94,15 @@ namespace ProjectMaelstrom
             panel2.Controls.Add(halfangFarmingBot);
             halfangFarmingBot.Show();
         }
+
+        private void loadBazaarReagentBot_Click(object sender, EventArgs e)
+        {
+            BazaarReagentBot bazaarReagentBot = new BazaarReagentBot();
+            bazaarReagentBot.TopLevel = false;
+            bazaarReagentBot.FormBorderStyle= FormBorderStyle.None;
+
+            panel2.Controls.Add(bazaarReagentBot);
+            bazaarReagentBot.Show();
+        }
     }
 }

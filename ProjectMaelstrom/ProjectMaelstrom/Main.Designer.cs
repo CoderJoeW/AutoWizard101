@@ -35,6 +35,7 @@
             startConfigurationBtn = new Button();
             panel2 = new Panel();
             loadHalfangBotBtn = new Button();
+            loadBazaarReagentBot = new Button();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -111,11 +112,23 @@
             loadHalfangBotBtn.UseVisualStyleBackColor = true;
             loadHalfangBotBtn.Click += loadHalfangBotBtn_Click;
             // 
+            // loadBazaarReagentBot
+            // 
+            loadBazaarReagentBot.Location = new Point(18, 232);
+            loadBazaarReagentBot.Margin = new Padding(4, 5, 4, 5);
+            loadBazaarReagentBot.Name = "loadBazaarReagentBot";
+            loadBazaarReagentBot.Size = new Size(228, 62);
+            loadBazaarReagentBot.TabIndex = 4;
+            loadBazaarReagentBot.Text = "Load Reagent Bot";
+            loadBazaarReagentBot.UseVisualStyleBackColor = true;
+            loadBazaarReagentBot.Click += loadBazaarReagentBot_Click;
+            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(772, 432);
+            Controls.Add(loadBazaarReagentBot);
             Controls.Add(loadHalfangBotBtn);
             Controls.Add(panel2);
             Controls.Add(startConfigurationBtn);
@@ -139,5 +152,6 @@
         private Button startConfigurationBtn;
         private Panel panel2;
         private Button loadHalfangBotBtn;
+        private Button loadBazaarReagentBot;
     }
 }
