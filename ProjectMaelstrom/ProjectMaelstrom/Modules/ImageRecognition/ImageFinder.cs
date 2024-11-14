@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing.Imaging;
+using System.Runtime.InteropServices;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
@@ -14,9 +9,43 @@ namespace ProjectMaelstrom.Modules.ImageRecognition
 {
     internal class ImageFinder
     {
+        [DllImport("user32.dll")]
+        private static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+
+        [DllImport("user32.dll")]
+        private static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
+
+        [DllImport("user32.dll")]
+        private static extern bool IsWindowVisible(IntPtr hWnd);
+
+        [DllImport("user32.dll")]
+        private static extern bool IsIconic(IntPtr hWnd);
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct RECT
+        {
+            public int Left;
+            public int Top;
+            public int Right;
+            public int Bottom;
+        }
+
         public static Point? SearchForTargetImageWithinScreenshot(string targetImagePath)
         {
-            using var capturedScreenshot = new Image<Bgr, byte>(CaptureScreen()).Convert<Hsv, byte>();
+            IntPtr windowHandle = GetWindowHandle();
+            if (windowHandle == IntPtr.Zero)
+            {
+                throw new Exception("Window not found.");
+            }
+
+            RECT rect = GetWindowRect(windowHandle);
+
+            int windowLeft = rect.Left;
+            int windowTop = rect.Top;
+
+            string screenshotPath = CaptureScreen(rect);
+
+            using var capturedScreenshot = new Image<Bgr, byte>(screenshotPath).Convert<Hsv, byte>();
             using var targetImage = new Image<Bgr, byte>(targetImagePath).Convert<Hsv, byte>();
 
             var comparisonWidth = capturedScreenshot.Width - targetImage.Width + 1;
@@ -29,14 +58,20 @@ namespace ProjectMaelstrom.Modules.ImageRecognition
             Point[] minLocations, maxLocations;
             matchingResult.MinMax(out minValues, out maxValues, out minLocations, out maxLocations);
 
-            var matchingThreshold = 0.7;
+            double matchingThreshold = 0.75;
             if (maxValues[0] >= matchingThreshold)
             {
-                return maxLocations[0];
+                Point matchingPoint = maxLocations[0];
+
+                matchingPoint.X += windowLeft;
+                matchingPoint.Y += windowTop;
+
+                return matchingPoint;
             }
 
             return null;
         }
+
 
         public static Point? RetrieveTargetImagePositionInScreenshot(string targetImagePath)
         {
@@ -45,21 +80,40 @@ namespace ProjectMaelstrom.Modules.ImageRecognition
             return position;
         }
 
-        public static string CaptureScreen()
+        public static string CaptureScreen(RECT rect)
         {
             string randomScreenshotName = GeneralUtils.Instance.RandomString(20);
             string screenshotFilePath = $"screenshots/{randomScreenshotName}.png";
 
-            using (var bitmapScreenshot = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, PixelFormat.Format24bppRgb))
+            int width = rect.Right - rect.Left;
+            int height = rect.Bottom - rect.Top;
+
+            using (var bitmapScreenshot = new Bitmap(width, height, PixelFormat.Format24bppRgb))
             {
                 using (var graphicsScreenshot = Graphics.FromImage(bitmapScreenshot))
                 {
-                    graphicsScreenshot.CopyFromScreen(Screen.PrimaryScreen.Bounds.Location, Point.Empty, Screen.PrimaryScreen.Bounds.Size, CopyPixelOperation.SourceCopy);
+                    graphicsScreenshot.CopyFromScreen(new Point(rect.Left, rect.Top), Point.Empty, new Size(width, height), CopyPixelOperation.SourceCopy);
                     bitmapScreenshot.Save(screenshotFilePath, ImageFormat.Png);
                 }
             }
 
             return screenshotFilePath;
+        }
+
+        public static IntPtr GetWindowHandle()
+        {
+            return FindWindow(null, "Wizard101");
+        }
+
+        public static RECT GetWindowRect(IntPtr windowHandle)
+        {
+            if (GetWindowRect(windowHandle, out RECT rect))
+            {
+                return rect;
+            } else
+            {
+                throw new Exception("Failed to retrieve window position.");
+            }
         }
     }
 }
