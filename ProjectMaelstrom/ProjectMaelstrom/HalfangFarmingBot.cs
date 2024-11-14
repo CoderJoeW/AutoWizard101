@@ -122,8 +122,9 @@ namespace ProjectMaelstrom
         private void HandleBattleWon()
         {
             UpdateBotState("Battle won teleporting to start");
-            bool teleported = GeneralUtils.Instance.Teleport();
 
+            bool teleported = GeneralUtils.Instance.Teleport();
+            
             if (teleported)
             {
                 _combatUtils.ResetCursorPosition();
