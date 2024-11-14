@@ -72,6 +72,56 @@ namespace ProjectMaelstrom.Modules.ImageRecognition
             return null;
         }
 
+        public static bool IsImageInCenter(string targetImagePath)
+        {
+            IntPtr windowHandle = GetWindowHandle();
+            if (windowHandle == IntPtr.Zero)
+            {
+                throw new Exception("Window not found.");
+            }
+
+            RECT rect = GetWindowRect(windowHandle);
+
+            int windowLeft = rect.Left;
+            int windowTop = rect.Top;
+
+            string screenshotPath = CaptureScreen(rect);
+
+            using var capturedScreenshot = new Image<Bgr, byte>(screenshotPath).Convert<Hsv, byte>();
+            using var targetImage = new Image<Bgr, byte>(targetImagePath).Convert<Hsv, byte>();
+
+            var comparisonWidth = capturedScreenshot.Width - targetImage.Width + 1;
+            var comparisonHeight = capturedScreenshot.Height - targetImage.Height + 1;
+
+            using var matchingResult = new Image<Gray, float>(comparisonWidth, comparisonHeight);
+            CvInvoke.MatchTemplate(capturedScreenshot, targetImage, matchingResult, TemplateMatchingType.CcoeffNormed);
+
+            double[] minValues, maxValues;
+            Point[] minLocations, maxLocations;
+            matchingResult.MinMax(out minValues, out maxValues, out minLocations, out maxLocations);
+
+            double matchingThreshold = 0.6;
+            if (maxValues[0] >= matchingThreshold)
+            {
+                Point matchingPoint = maxLocations[0];
+                matchingPoint.X += windowLeft;
+                matchingPoint.Y += windowTop;
+
+                int centerX = capturedScreenshot.Width / 2;
+                int centerY = capturedScreenshot.Height / 2;
+
+                int imageCenterX = matchingPoint.X + targetImage.Width / 2;
+                int imageCenterY = matchingPoint.Y + targetImage.Height / 2;
+
+                int tolerance = 2000;
+
+                bool isCenter = Math.Abs(centerX - imageCenterX) <= tolerance && Math.Abs(centerY - imageCenterY) <= tolerance;
+
+                return isCenter;
+            }
+
+            return false;
+        }
 
         public static Point? RetrieveTargetImagePositionInScreenshot(string targetImagePath)
         {
@@ -93,6 +143,7 @@ namespace ProjectMaelstrom.Modules.ImageRecognition
                 using (var graphicsScreenshot = Graphics.FromImage(bitmapScreenshot))
                 {
                     graphicsScreenshot.CopyFromScreen(new Point(rect.Left, rect.Top), Point.Empty, new Size(width, height), CopyPixelOperation.SourceCopy);
+
                     bitmapScreenshot.Save(screenshotFilePath, ImageFormat.Png);
                 }
             }
