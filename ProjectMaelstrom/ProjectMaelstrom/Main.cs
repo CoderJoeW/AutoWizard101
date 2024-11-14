@@ -52,7 +52,18 @@ namespace ProjectMaelstrom
                 Thread.Sleep(500);
             }
 
-            string imagePath = ImageFinder.CaptureScreen();
+            IntPtr windowHandle = ImageFinder.GetWindowHandle();
+            if (windowHandle == IntPtr.Zero)
+            {
+                throw new Exception("Window not found.");
+            }
+
+            ImageFinder.RECT rect = ImageFinder.GetWindowRect(windowHandle);
+
+            int windowLeft = rect.Left;
+            int windowTop = rect.Top;
+
+            string imagePath = ImageFinder.CaptureScreen(rect);
 
             string extractedText = await ImageHelpers.ExtractTextFromImage(imagePath);
 
