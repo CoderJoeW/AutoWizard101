@@ -26,7 +26,6 @@ namespace ProjectMaelstrom.Modules.ImageRecognition
             using var streamContent = new StreamContent(fileStream);
             using var fileContent = new ByteArrayContent(await streamContent.ReadAsByteArrayAsync());
 
-            // Set content type based on the file extension
             string fileExtension = Path.GetExtension(imagePath).ToLower();
             string contentType = fileExtension switch
             {
