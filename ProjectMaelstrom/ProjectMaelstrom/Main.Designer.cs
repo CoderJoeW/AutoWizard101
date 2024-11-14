@@ -45,17 +45,17 @@
             panel1.Controls.Add(label2);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
-            panel1.Margin = new Padding(5, 6, 5, 6);
+            panel1.Margin = new Padding(4, 5, 4, 5);
             panel1.Name = "panel1";
-            panel1.Size = new Size(927, 74);
+            panel1.Size = new Size(772, 62);
             panel1.TabIndex = 0;
             // 
             // editSettingsBtn
             // 
-            editSettingsBtn.Location = new Point(785, 18);
-            editSettingsBtn.Margin = new Padding(3, 4, 3, 4);
+            editSettingsBtn.Location = new Point(654, 15);
+            editSettingsBtn.Margin = new Padding(2, 3, 2, 3);
             editSettingsBtn.Name = "editSettingsBtn";
-            editSettingsBtn.Size = new Size(134, 40);
+            editSettingsBtn.Size = new Size(112, 33);
             editSettingsBtn.TabIndex = 1;
             editSettingsBtn.Text = "Settings";
             editSettingsBtn.UseVisualStyleBackColor = true;
@@ -64,29 +64,29 @@
             // manaAmountLabel
             // 
             manaAmountLabel.AutoSize = true;
-            manaAmountLabel.Location = new Point(102, 18);
-            manaAmountLabel.Margin = new Padding(5, 0, 5, 0);
+            manaAmountLabel.Location = new Point(85, 15);
+            manaAmountLabel.Margin = new Padding(4, 0, 4, 0);
             manaAmountLabel.Name = "manaAmountLabel";
-            manaAmountLabel.Size = new Size(87, 30);
+            manaAmountLabel.Size = new Size(79, 25);
             manaAmountLabel.TabIndex = 3;
             manaAmountLabel.Text = "100/200";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(21, 18);
-            label2.Margin = new Padding(5, 0, 5, 0);
+            label2.Location = new Point(18, 15);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(71, 30);
+            label2.Size = new Size(60, 25);
             label2.TabIndex = 2;
             label2.Text = "Mana:";
             // 
             // startConfigurationBtn
             // 
-            startConfigurationBtn.Location = new Point(21, 106);
-            startConfigurationBtn.Margin = new Padding(5, 6, 5, 6);
+            startConfigurationBtn.Location = new Point(18, 88);
+            startConfigurationBtn.Margin = new Padding(4, 5, 4, 5);
             startConfigurationBtn.Name = "startConfigurationBtn";
-            startConfigurationBtn.Size = new Size(274, 74);
+            startConfigurationBtn.Size = new Size(228, 62);
             startConfigurationBtn.TabIndex = 1;
             startConfigurationBtn.Text = "Start Configuration";
             startConfigurationBtn.UseVisualStyleBackColor = true;
@@ -94,17 +94,18 @@
             // 
             // panel2
             // 
-            panel2.Location = new Point(335, 106);
+            panel2.Location = new Point(279, 88);
+            panel2.Margin = new Padding(2);
             panel2.Name = "panel2";
-            panel2.Size = new Size(580, 400);
+            panel2.Size = new Size(483, 333);
             panel2.TabIndex = 2;
             // 
             // loadHalfangBotBtn
             // 
-            loadHalfangBotBtn.Location = new Point(21, 192);
-            loadHalfangBotBtn.Margin = new Padding(5, 6, 5, 6);
+            loadHalfangBotBtn.Location = new Point(18, 160);
+            loadHalfangBotBtn.Margin = new Padding(4, 5, 4, 5);
             loadHalfangBotBtn.Name = "loadHalfangBotBtn";
-            loadHalfangBotBtn.Size = new Size(274, 74);
+            loadHalfangBotBtn.Size = new Size(228, 62);
             loadHalfangBotBtn.TabIndex = 3;
             loadHalfangBotBtn.Text = "Load Halfang Bot";
             loadHalfangBotBtn.UseVisualStyleBackColor = true;
@@ -112,15 +113,15 @@
             // 
             // Main
             // 
-            AutoScaleDimensions = new SizeF(12F, 30F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(927, 518);
+            ClientSize = new Size(772, 432);
             Controls.Add(loadHalfangBotBtn);
             Controls.Add(panel2);
             Controls.Add(startConfigurationBtn);
             Controls.Add(panel1);
-            Margin = new Padding(5, 6, 5, 6);
-            MaximumSize = new Size(951, 582);
+            Margin = new Padding(4, 5, 4, 5);
+            MaximumSize = new Size(796, 494);
             Name = "Main";
             Text = "Main";
             Load += Main_Load;
