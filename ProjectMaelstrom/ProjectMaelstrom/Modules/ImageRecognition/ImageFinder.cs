@@ -29,7 +29,7 @@ namespace ProjectMaelstrom.Modules.ImageRecognition
             Point[] minLocations, maxLocations;
             matchingResult.MinMax(out minValues, out maxValues, out minLocations, out maxLocations);
 
-            var matchingThreshold = 0.8;
+            var matchingThreshold = 0.6;
             if (maxValues[0] >= matchingThreshold)
             {
                 return maxLocations[0];
