@@ -27,16 +27,17 @@
             // 
             // listBox1
             // 
+            listBox1.Dock = DockStyle.Left;
             listBox1.FormattingEnabled = true;
-            listBox1.Location = new Point(12, 37);
+            listBox1.Location = new Point(0, 0);
             listBox1.Name = "listBox1";
-            listBox1.Size = new Size(245, 404);
+            listBox1.Size = new Size(245, 450);
             listBox1.TabIndex = 0;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 9);
+            label1.Location = new Point(251, 9);
             label1.Name = "label1";
             label1.Size = new Size(231, 25);
             label1.TabIndex = 1;
@@ -44,7 +45,7 @@
             // 
             // btn
             // 
-            btn.Location = new Point(289, 37);
+            btn.Location = new Point(251, 59);
             btn.Name = "btn";
             btn.Size = new Size(100, 40);
             btn.TabIndex = 2;
