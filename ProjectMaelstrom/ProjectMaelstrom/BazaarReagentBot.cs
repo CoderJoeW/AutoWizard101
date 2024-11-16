@@ -45,7 +45,7 @@ namespace ProjectMaelstrom
         {
             if (!_botStarted)
             {
-                _runTimer = new System.Timers.Timer(TimeSpan.FromSeconds(1));
+                _runTimer = new System.Timers.Timer(TimeSpan.FromMilliseconds(200));
                 _runTimer.Elapsed +=BazaarLoop;
                 _runTimer.AutoReset = true;
                 _runTimer.Start();
@@ -68,6 +68,8 @@ namespace ProjectMaelstrom
             }
 
             _isRunning = true;
+
+            RefreshShop();
 
             if (listBox1.SelectedItems.Count > 0)
             {
@@ -96,7 +98,8 @@ namespace ProjectMaelstrom
                 label1.Text = "Found item";
                 WinAPI.click(item.Value);
                 BuyReagent();
-            }else
+            }
+            else
             {
                 label1.Text = "Not ofund";
             }
@@ -134,8 +137,6 @@ namespace ProjectMaelstrom
                     WinAPI.click(okBtn.Value);
                 }
             }
-
-            RefreshShop();
         }
 
         private void RefreshShop()
@@ -151,6 +152,11 @@ namespace ProjectMaelstrom
             {
                 WinAPI.click(refreshBtn.Value);
             }
+        }
+
+        private void BazaarReagentBot_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
