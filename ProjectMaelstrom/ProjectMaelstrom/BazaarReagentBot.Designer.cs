@@ -23,7 +23,6 @@
             listBox1 = new ListBox();
             label1 = new Label();
             btn = new Button();
-            label2 = new Label();
             SuspendLayout();
             // 
             // listBox1
@@ -53,21 +52,11 @@
             btn.UseVisualStyleBackColor = true;
             btn.Click += startButton_Click;
             // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(397, 184);
-            label2.Name = "label2";
-            label2.Size = new Size(59, 25);
-            label2.TabIndex = 3;
-            label2.Text = "label2";
-            // 
             // BazaarReagentBot
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(listBox1);
             Controls.Add(btn);
@@ -78,7 +67,5 @@
         }
 
         #endregion
-
-        private Label label2;
     }
 }
