@@ -62,6 +62,12 @@
     <None Update="Resources\1280x720\Bazaar\buybtn.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Resources\1280x720\Bazaar\buyCount.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\1280x720\Bazaar\buyMoreBtn.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Resources\1280x720\Bazaar\okBtn.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -104,7 +110,7 @@
     <None Update="Resources\1280x720\Combat\Cards\meteor\m2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\1280x720\Combat\Utils\blank.png">
+    <None Update="Resources\1280x720\General\blank.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Resources\1280x720\Combat\Utils\marklocation.png">

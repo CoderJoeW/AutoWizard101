@@ -106,5 +106,18 @@ namespace ProjectMaelstrom.Utilities
             return new string(Enumerable.Repeat(chars, length)
                 .Select(s => s[_random.Next(s.Length)]).ToArray());
         }
+
+        public void ResetCursorPosition()
+        {
+            Point? blankSpot = ImageFinder.RetrieveTargetImagePositionInScreenshot($"{StorageUtils.GetAppPath()}/General/blank.png");
+
+            if (blankSpot.HasValue)
+            {
+                _playerController.Click(blankSpot.Value);
+                return;
+            }
+
+            _playerController.Click(new Point(50, 20));
+        }
     }
 }

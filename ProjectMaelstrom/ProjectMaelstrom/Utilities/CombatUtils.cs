@@ -70,19 +70,6 @@ namespace ProjectMaelstrom.Utilities
             }
         }
 
-        public void ResetCursorPosition()
-        {
-            Point? blankSpot = ImageFinder.RetrieveTargetImagePositionInScreenshot($"{StorageUtils.GetAppPath()}/Combat/Utils/blank.png");
-
-            if (blankSpot.HasValue)
-            {
-                _playerController.Click(blankSpot.Value);
-                return;
-            }
-
-            _playerController.Click(new Point(50, 20));
-        }
-
         public bool IsOutsideDungeon()
         {
             Point? sigil = ImageFinder.RetrieveTargetImagePositionInScreenshot($"{StorageUtils.GetAppPath()}/Combat/Utils/sigil.png");

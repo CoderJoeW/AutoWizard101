@@ -40,6 +40,11 @@ namespace ProjectMaelstrom
             _inputSimulator.Keyboard.KeyPress(VirtualKeyCode.VK_X);
         }
 
+        public void PressNumber9()
+        {
+            _inputSimulator.Keyboard.KeyPress(VirtualKeyCode.NUMPAD9);
+        }
+
         public void Click(Point clickPoint)
         {
             WinAPI.click(clickPoint);

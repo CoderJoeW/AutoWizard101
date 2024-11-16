@@ -15,6 +15,8 @@ namespace ProjectMaelstrom
 
         private bool _isRunning = false;
 
+        private readonly PlayerController _playerController = new PlayerController();
+
         public BazaarReagentBot()
         {
             InitializeComponent();
@@ -69,6 +71,8 @@ namespace ProjectMaelstrom
 
             _isRunning = true;
 
+            GeneralUtils.Instance.ResetCursorPosition();
+
             RefreshShop();
 
             if (listBox1.SelectedItems.Count > 0)
@@ -107,29 +111,51 @@ namespace ProjectMaelstrom
 
         private void BuyReagent()
         {
-            Point? buyBtn = ImageFinder.RetrieveTargetImagePositionInScreenshot($"{StorageUtils.GetAppPath()}/Bazaar/buybtn.png");
+            Point? buyMoreBtn = ImageFinder.RetrieveTargetImagePositionInScreenshot($"{StorageUtils.GetAppPath()}/Bazaar/buyMoreBtn.png");
 
-            while (buyBtn == null)
+            while (buyMoreBtn == null)
             {
-                buyBtn = ImageFinder.RetrieveTargetImagePositionInScreenshot($"{StorageUtils.GetAppPath()}/Bazaar/buybtn.png");
+                buyMoreBtn = ImageFinder.RetrieveTargetImagePositionInScreenshot($"{StorageUtils.GetAppPath()}/Bazaar/buyMoreBtn.png");
             }
 
-            if (buyBtn.HasValue)
+            if (buyMoreBtn.HasValue)
             {
-                WinAPI.click(buyBtn.Value);
+                WinAPI.click(buyMoreBtn.Value);
 
-                Point? yesBtn = ImageFinder.RetrieveTargetImagePositionInScreenshot($"{StorageUtils.GetAppPath()}/Bazaar/yesBtn.png");
-                Point? okBtn = ImageFinder.RetrieveTargetImagePositionInScreenshot($"{StorageUtils.GetAppPath()}/Bazaar/okBtn.png");
+                Point? buyCount = ImageFinder.RetrieveTargetImagePositionInScreenshot($"{StorageUtils.GetAppPath()}/Bazaar/buyCount.png");
 
-                while (yesBtn == null && okBtn == null)
+                while (buyCount == null)
                 {
-                    yesBtn = ImageFinder.RetrieveTargetImagePositionInScreenshot($"{StorageUtils.GetAppPath()}/Bazaar/yesBtn.png");
-                    okBtn = ImageFinder.RetrieveTargetImagePositionInScreenshot($"{StorageUtils.GetAppPath()}/Bazaar/okBtn.png");
+                    buyCount = ImageFinder.RetrieveTargetImagePositionInScreenshot($"{StorageUtils.GetAppPath()}/Bazaar/buyCount.png");
                 }
 
-                if (yesBtn.HasValue)
+                if (buyCount.HasValue)
                 {
-                    WinAPI.click(yesBtn.Value);
+                    Point test = buyCount.Value;
+                    test.X += 10;
+                    WinAPI.click(test);
+                    _playerController.PressNumber9();
+                    _playerController.PressNumber9();
+                    _playerController.PressNumber9();
+                }
+
+                Point? buyBtn = ImageFinder.RetrieveTargetImagePositionInScreenshot($"{StorageUtils.GetAppPath()}/Bazaar/buyBtn.png");
+
+                while (buyBtn == null)
+                {
+                    buyBtn = ImageFinder.RetrieveTargetImagePositionInScreenshot($"{StorageUtils.GetAppPath()}/Bazaar/buyBtn.png");
+                }
+
+                if (buyBtn.HasValue)
+                {
+                    WinAPI.click(buyBtn.Value);
+                }
+
+                Point? okBtn = ImageFinder.RetrieveTargetImagePositionInScreenshot($"{StorageUtils.GetAppPath()}/Bazaar/okBtn.png");
+
+                while (okBtn == null)
+                {
+                    okBtn = ImageFinder.RetrieveTargetImagePositionInScreenshot($"{StorageUtils.GetAppPath()}/Bazaar/okBtn.png");
                 }
 
                 if (okBtn.HasValue)
@@ -152,11 +178,6 @@ namespace ProjectMaelstrom
             {
                 WinAPI.click(refreshBtn.Value);
             }
-        }
-
-        private void BazaarReagentBot_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

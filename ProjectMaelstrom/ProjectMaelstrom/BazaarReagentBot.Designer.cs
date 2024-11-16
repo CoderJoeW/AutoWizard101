@@ -62,7 +62,6 @@
             Controls.Add(btn);
             Name = "BazaarReagentBot";
             Text = "BazaarReagentBot";
-            Load += BazaarReagentBot_Load;
             ResumeLayout(false);
             PerformLayout();
         }
