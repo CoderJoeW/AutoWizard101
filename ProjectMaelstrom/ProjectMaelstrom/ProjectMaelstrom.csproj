@@ -92,6 +92,9 @@
     <None Update="Resources\1280x720\Bazaar\Reagents\Comet_Tail.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Resources\1280x720\Bazaar\Reagents\Fish_Fin.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Resources\1280x720\Bazaar\Reagents\Frost_Flower.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
