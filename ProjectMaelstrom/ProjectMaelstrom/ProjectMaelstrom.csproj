@@ -179,6 +179,9 @@
     <None Update="Resources\1280x720\Halfang\bristlecrown.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Resources\1280x720\Halfang\loading.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Resources\2256x1504\Combat\Cards\meteor\m1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

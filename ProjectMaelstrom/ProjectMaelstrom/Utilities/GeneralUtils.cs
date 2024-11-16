@@ -25,6 +25,11 @@ internal class GeneralUtils : Util
     {
         Point? marker = ImageFinder.RetrieveTargetImagePositionInScreenshot($"{StorageUtils.GetAppPath()}/Combat/Utils/marklocation.png");
 
+        while (marker == null )
+        {
+            marker = ImageFinder.RetrieveTargetImagePositionInScreenshot($"{StorageUtils.GetAppPath()}/Combat/Utils/marklocation.png");
+        }
+
         if (marker.HasValue)
         {
             _playerController.Click(marker.Value);
@@ -98,6 +103,11 @@ internal class GeneralUtils : Util
     public void ResetCursorPosition()
     {
         Point? blankSpot = ImageFinder.RetrieveTargetImagePositionInScreenshot($"{StorageUtils.GetAppPath()}/General/blank.png");
+
+        while (blankSpot == null)
+        {
+            blankSpot = ImageFinder.RetrieveTargetImagePositionInScreenshot($"{StorageUtils.GetAppPath()}/General/blank.png");
+        }
 
         if (blankSpot.HasValue)
         {

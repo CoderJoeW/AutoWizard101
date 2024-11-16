@@ -1,6 +1,7 @@
 ﻿using ProjectMaelstrom.Modules.ImageRecognition;
 using ProjectMaelstrom.Utilities;
 using System.Runtime.InteropServices;
+using System.Timers;
 
 namespace ProjectMaelstrom;
 
@@ -12,7 +13,8 @@ public partial class HalfangFarmingBot : Form
     [DllImport("user32.dll")]
     private static extern IntPtr GetMessageExtraInfo();
 
-    private Thread _halfangBot;
+    private System.Timers.Timer _runTimer;
+
     private bool _botRun = false;
 
     private readonly PlayerController _playerController = new PlayerController();
@@ -23,6 +25,8 @@ public partial class HalfangFarmingBot : Form
     private bool _battleWon = false;
     private bool _botStarted = false;
 
+    private bool _isRunning = false;
+
     public HalfangFarmingBot()
     {
         InitializeComponent();
@@ -31,40 +35,45 @@ public partial class HalfangFarmingBot : Form
 
     private void HalfangFarmingBot_Load(object sender, EventArgs e) { }
 
-    private void DungeonLoop()
+    private void DungeonLoop(object? sender, ElapsedEventArgs e)
     {
-        while (_botRun)
+        if (_isRunning)
         {
+            return;
+        }
 
-            if (_combatUtils.IsOutsideDungeon())
+        _isRunning = true;
+
+        if (_combatUtils.IsOutsideDungeon() && !_joiningDungeon)
+        {
+            HandleJoinDungeon();
+        }
+        else if (!IsBattleStarted())
+        {
+            HandleInDungeonBattleNotStarted();
+        }
+        else if (_combatUtils.IsInBattle())
+        {
+            if (_combatUtils.IsMyTurn())
             {
-                HandleJoinDungeon();
-            }
-            else if (!IsBattleStarted())
-            {
-                HandleInDungeonBattleNotStarted();
-            }
-            else if (_combatUtils.IsInBattle())
-            {
-                if (_combatUtils.IsMyTurn())
-                {
-                    HandleMyTurn();
-                }
-                else
-                {
-                    UpdateBotState("Waiting for turn");
-                }
+                HandleMyTurn();
             }
             else
             {
-                HandleBattleOver();
-
-                if (_battleWon)
-                {
-                    HandleBattleWon();
-                }
+                UpdateBotState("Waiting for turn");
             }
         }
+        else
+        {
+            HandleBattleOver();
+
+            if (_battleWon)
+            {
+                HandleBattleWon();
+            }
+        }
+
+        _isRunning = false;
     }
 
     private bool IsBattleStarted()
@@ -86,7 +95,18 @@ public partial class HalfangFarmingBot : Form
         GeneralUtils.Instance.SetMarker();
         GeneralUtils.Instance.ResetCursorPosition();
         _playerController.Interact();
-        UpdateJoiningDungeonState(false);
+
+        Point? loadingIcon = ImageFinder.RetrieveTargetImagePositionInScreenshot($"{StorageUtils.GetAppPath()}/Halfang/loading.png");
+
+        while (loadingIcon == null)
+        {
+            loadingIcon = ImageFinder.RetrieveTargetImagePositionInScreenshot($"{StorageUtils.GetAppPath()}/Halfang/loading.png");
+        }
+
+        if (loadingIcon.HasValue)
+        {
+            UpdateJoiningDungeonState(false);
+        }
     }
 
     private void HandleInDungeonBattleNotStarted()
@@ -136,17 +156,16 @@ public partial class HalfangFarmingBot : Form
     {
         if (!_botStarted)
         {
-            _halfangBot = new Thread(DungeonLoop);
-            _halfangBot.Name = "Halfang Bot";
-            _botRun = true;
-            _halfangBot.Start();
+            _runTimer = new System.Timers.Timer(TimeSpan.FromMilliseconds(200));
+            _runTimer.Elapsed += DungeonLoop;
+            _runTimer.AutoReset = true;
+            _runTimer.Start();
             _botStarted = true;
             button1.Text = "Stop Bot";
         }
         else
         {
-            _botRun = false;
-            _halfangBot.Join(); // Wait for the thread to finish
+            _runTimer?.Stop();
             _botStarted = false;
             button1.Text = "Start Bot";
         }
