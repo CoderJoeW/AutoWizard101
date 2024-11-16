@@ -1,33 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace ProjectMaelstrom;
 
-namespace ProjectMaelstrom
+internal class StateManager
 {
-    internal class StateManager
+    private static StateManager? _instance;
+
+    public static StateManager Instance
     {
-        private static StateManager? _instance;
-
-        public static StateManager Instance
+        get
         {
-            get
+            if (_instance == null)
             {
-                if(_instance == null)
-                {
-                    _instance= new StateManager();
-                }
-
-                return _instance;
+                _instance= new StateManager();
             }
+
+            return _instance;
         }
-
-        public string? SelectedResolution { set; get; } = "1280x720";
-
-        public int CurrentMana { set; get; }
-        public int MaxMana { set; get; }
-        
-        public int SetMarkerCost { set; get; }
     }
+
+    public string? SelectedResolution { set; get; } = "1280x720";
+
+    public int CurrentMana { set; get; }
+    public int MaxMana { set; get; }
+
+    public int SetMarkerCost { set; get; }
 }
