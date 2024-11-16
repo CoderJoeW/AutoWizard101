@@ -68,7 +68,13 @@
     <None Update="Resources\1280x720\Bazaar\Reagents\Amethyst.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Resources\1280x720\Bazaar\Reagents\Black_Coal.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Resources\1280x720\Bazaar\Reagents\Citrine.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\1280x720\Bazaar\Reagents\Jade.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Resources\1280x720\Bazaar\Reagents\Onyx.png">
@@ -78,6 +84,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Resources\1280x720\Bazaar\Reagents\Peridot.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\1280x720\Bazaar\Reagents\Ruby.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\1280x720\Bazaar\Reagents\Sapphire.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Resources\1280x720\Bazaar\refreshBtn.png">
