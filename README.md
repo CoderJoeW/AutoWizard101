@@ -1,24 +1,43 @@
-# Welcome to Project Maelstrom
-A wizard101 bot development effort to bring automation to all aspects of the game
+# 🌊 **Welcome to Project Maelstrom**  
+An ambitious **Wizard101 bot development project** dedicated to automating gameplay and enhancing your experience.
 
-As of writing the bot has a very good success rate of automating buying of reagents in the bazaar at a game resolution of 800x600
+---
 
-This project is gonna go a long way and I definitely need to make some actual documentation but for the moment I would rather work to keep improving the project
+## 🌟 **What's New?**  
 
-Using .net 6 core with Winforms
+✨ **Fully Operational Bots**:  
+- **Reagent Farming Bot** 🧪  
+   Automates farming for reagents (not all supported yet).  
+   - **Supported Resolution**: *1280x720*
 
-## Why is it called Project Maelstrom?
-I am a weather fanatic and love the pure beauty and power of nature and a Maelstrom just looks and sounds super cool :)
+- **Halfang Dungeon Farming Bot** ⚔️  
+   Efficiently farm Halfang with ease.  
+   - **Supported Resolution**: *1280x720*  
+   - **Current Wizard Support**: *Fire Wizards using Meteor* 🔥  
+     *(More wizard support is planned!)*  
 
-## Credits
-Big thank you to the following projects that laid the stepping stones to making this project possible
+---
 
-Idea and WinAPI implementation
-https://github.com/TempJannik/Wizard101-Bazaar-Bot
+## 🌪️ **Why *Project Maelstrom*?**  
+The name reflects my love for weather and the awe-inspiring beauty and raw power of nature. A *Maelstrom* captures that perfectly with its captivating energy and chaotic elegance. 🌊⚡
 
-Image in Image searching with tolerance
-https://www.codeproject.com/Articles/38619/Finding-a-Bitmap-contained-inside-another-Bitmap
+---
 
-@Microsoft for building the best language and platform for development
-Visual Studio & C#
+## 💡 **Credits**  
 
+A huge thank-you to these inspiring projects and tools that made *Project Maelstrom* possible:  
+
+- **Idea and WinAPI Implementation**  
+   [Wizard101 Bazaar Bot by TempJannik](https://github.com/TempJannik/Wizard101-Bazaar-Bot)  
+
+- **Image-in-Image Searching with Tolerance**  
+   [CodeProject - Finding a Bitmap Inside Another Bitmap](https://www.codeproject.com/Articles/38619/Finding-a-Bitmap-contained-inside-another-Bitmap)  
+
+- **Microsoft** for creating a phenomenal development ecosystem:  
+   - **Visual Studio**  
+   - **C#**  
+
+---
+
+### 🚀 **Join the Journey**  
+Whether you're here to farm reagents, tackle dungeons, or simply marvel at the power of automation, *Project Maelstrom* is designed to level up your Wizard101 adventure. Stay tuned for more bots and features! 🌟  
