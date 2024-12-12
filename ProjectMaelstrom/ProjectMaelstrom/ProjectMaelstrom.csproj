@@ -176,7 +176,13 @@
     <None Update="Resources\1280x720\General\window_taskbar_icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Resources\1280x720\Halfang\arenaSymbol.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Resources\1280x720\Halfang\bristlecrown.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\1280x720\Halfang\dungeonExit.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Resources\1280x720\Halfang\loading.png">

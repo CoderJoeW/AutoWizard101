@@ -21,6 +21,7 @@ public partial class HalfangFarmingBot : Form
     private readonly CombatUtils _combatUtils = new CombatUtils();
 
     private bool _joiningDungeon = false;
+    private bool _inDungeon = false;
     private bool _battleStarted = false;
     private bool _battleWon = false;
     private bool _botStarted = false;
@@ -44,15 +45,25 @@ public partial class HalfangFarmingBot : Form
 
         _isRunning = true;
 
-        if (_combatUtils.IsOutsideDungeon() && !_joiningDungeon)
+        if (_combatUtils.IsOutsideDungeon() && !_joiningDungeon && !_inDungeon)
         {
+            UpdateBotState("Outside dungeon joining");
             HandleJoinDungeon();
         }
-        else if (!IsBattleStarted())
+        else if (_inDungeon && !_battleStarted && !_battleWon)
         {
-            HandleInDungeonBattleNotStarted();
+            UpdateBotState("Battle not started joining");
+            _playerController.MoveForward();
+
+            while (!_battleStarted)
+            {
+                if (_combatUtils.IsInBattle())
+                {
+                    _battleStarted = true;
+                }
+            }
         }
-        else if (_combatUtils.IsInBattle())
+        else if (_battleStarted && !_battleWon)
         {
             if (_combatUtils.IsMyTurn())
             {
@@ -62,37 +73,26 @@ public partial class HalfangFarmingBot : Form
             {
                 UpdateBotState("Waiting for turn");
             }
-        }
-        else
-        {
-            HandleBattleOver();
 
-            if (_battleWon)
+            Point? spellbook = ImageFinder.RetrieveTargetImagePositionInScreenshot($"{StorageUtils.GetAppPath()}/General/spellbook.png");
+
+            if (spellbook != null)
             {
-                HandleBattleWon();
+                HandleBattleOver();
             }
+        }
+        else if (_battleWon)
+        {
+            HandleBattleWon();
         }
 
         _isRunning = false;
-    }
-
-    private bool IsBattleStarted()
-    {
-        Point? bristlecrown = ImageFinder.RetrieveTargetImagePositionInScreenshot($"{StorageUtils.GetAppPath()}/Halfang/bristlecrown.png");
-
-        if (bristlecrown.HasValue)
-        {
-            return false;
-        }
-
-        return true;
     }
 
     private void HandleJoinDungeon()
     {
         UpdateJoiningDungeonState(true);
         UpdateBotState("Outside dungeon joining");
-        GeneralUtils.Instance.SetMarker();
         GeneralUtils.Instance.ResetCursorPosition();
         _playerController.Interact();
 
@@ -106,13 +106,8 @@ public partial class HalfangFarmingBot : Form
         if (loadingIcon.HasValue)
         {
             UpdateJoiningDungeonState(false);
+            UpdateInDungeonState(true);
         }
-    }
-
-    private void HandleInDungeonBattleNotStarted()
-    {
-        UpdateBotState("Battle not started joining");
-        _playerController.MoveForward();
     }
 
     private void HandleMyTurn()
@@ -141,14 +136,13 @@ public partial class HalfangFarmingBot : Form
 
     private void HandleBattleWon()
     {
-        UpdateBotState("Battle won teleporting to start");
-
         bool teleported = GeneralUtils.Instance.Teleport();
-
+        
         if (teleported)
         {
             GeneralUtils.Instance.ResetCursorPosition();
             UpdateBattleWonState(false);
+            UpdateInDungeonState(false);
         }
     }
 
@@ -190,6 +184,13 @@ public partial class HalfangFarmingBot : Form
         _joiningDungeon = state;
         joiningDungeonText.Text = state ? "True" : "False";
         joiningDungeonText.ForeColor = state ? Color.DarkGreen : Color.Red;
+    }
+
+    private void UpdateInDungeonState(bool state)
+    {
+        _inDungeon = state;
+        inDungeonText.Text = state ? "True" : "False";
+        inDungeonText.ForeColor = state ? Color.DarkGreen : Color.Red;
     }
 
     private void UpdateBotState(string state)
