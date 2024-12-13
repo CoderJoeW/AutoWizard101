@@ -58,7 +58,14 @@ internal class ImageFinder
         Point[] minLocations, maxLocations;
         matchingResult.MinMax(out minValues, out maxValues, out minLocations, out maxLocations);
 
-        File.Delete(screenshotPath);
+        try
+        {
+            File.Delete(screenshotPath);
+        }
+        catch
+        {
+
+        }
 
         double matchingThreshold = 0.75;
         if (maxValues[0] >= matchingThreshold)
