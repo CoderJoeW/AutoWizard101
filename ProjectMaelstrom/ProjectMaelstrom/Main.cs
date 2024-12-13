@@ -39,10 +39,6 @@ public partial class Main : Form
 
     private async void startConfigurationBtn_Click(object sender, EventArgs e)
     {
-        while(true)
-        {
-            ImageFinder.IsImageInCenter($"{StorageUtils.GetAppPath()}/Halfang/loading.png");
-        }
         while (!GeneralUtils.Instance.IsGameVisible())
         {
             GeneralUtils.Instance.OpenGameWindow();
